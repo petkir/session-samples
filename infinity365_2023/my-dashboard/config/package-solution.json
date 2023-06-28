@@ -1,0 +1,63 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "my-dashboard-client-side-solution",
+    "id": "73ca236f-c271-4b71-8cfe-42cb9436a2a9",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.17.3"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "WelcomeInfinity description"
+      },
+      "longDescription": {
+        "default": "WelcomeInfinity description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "welcome-infinity Feature",
+        "description": "The feature that activates elements of the welcome-infinity solution.",
+        "id": "f5e901ee-40b8-4c0a-8be0-b071931c344c",
+        "version": "1.0.0.0",
+        "componentIds": [
+          "f5e901ee-40b8-4c0a-8be0-b071931c344c",
+          "7e087ae2-20e8-46f5-b2f7-36adb23f50be",
+          "5cf5e465-0f19-426d-bf99-6c19b064403f"
+        ]
+      }
+    ],
+    "webApiPermissionRequests": [
+      {
+        "resource": "Infinity2023SPFx",
+        "scope": "user_impersonation"
+      },
+      {
+        "resource": "Windows Azure Active Directory",
+        "scope": "User.Read"
+      },
+      {
+        "resource": "Windows Azure Active Directory",
+        "scope": "Calendars.Read"
+      },
+      {
+        "resource": "Azure DevOps",
+        "scope": "user_impersonation"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/my-dashboard.sppkg"
+  }
+}

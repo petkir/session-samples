@@ -1,0 +1,70 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.14",
+    "version": "1.0.1",
+    "showLoadingIndicator": false,
+    "id": "73ca236f-c271-4b71-8cfe-42cb9436a2a9",
+    "packageName": "com.Infinity2023SPFx",
+    "developer": {
+        "name": "Peter Kirschner",
+        "websiteUrl": "https://pnp.github.io/",
+        "privacyUrl": "https://pnp.github.io/",
+        "termsOfUseUrl": "https://pnp.github.io/"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Infinity2023SPFx",
+        "full": "Infinity2023SPFx"
+    },
+    "description": {
+        "short": "Infinity2023SPFx",
+        "full": "Infinity2023SPFx"
+    },
+    "accentColor": "#FFFFFF",
+    "staticTabs": [
+        {
+            "entityId": "70001",
+            "name": "Übersicht",
+            "contentUrl": "https://{teamSiteDomain}/_layouts/15/TeamsLogon.aspx?SPFX=true&dest=/_layouts/15/teamshostedapp.aspx%3Fteams%26personal%26componentId=f5e901ee-40b8-4c0a-8be0-b071931c344c%26forceLocale={locale}",
+            "scopes": [
+                "personal"
+            ]
+        },
+        {
+            "entityId": "70002",
+            "name": "Projektmanagement",
+            "contentUrl": "https://{teamSiteDomain}/_layouts/15/TeamsLogon.aspx?SPFX=true&dest=/_layouts/15/teamshostedapp.aspx%3Fteams%26personal%26componentId=5cf5e465-0f19-426d-bf99-6c19b064403f%26forceLocale={locale}",
+            "scopes": [
+                "personal"
+            ]
+        },
+        {
+            "entityId": "70003",
+            "name": "Power BI",
+            "contentUrl": "https://{teamSiteDomain}/_layouts/15/TeamsLogon.aspx?SPFX=true&dest=/_layouts/15/teamshostedapp.aspx%3Fteams%26personal%26componentId=5cf5e465-0f19-426d-bf99-6c19b064403f%26forceLocale={locale}",
+            "scopes": [
+                "personal"
+            ]
+        },
+        {
+            "entityId": "about",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "permissions": [
+        "identity"
+    ],
+    "validDomains": [
+        "*.login.microsoftonline.com",
+        "*.sharepoint-df.com",
+        "spoppe-a.akamaihd.net",
+        "spoprod-a.akamaihd.net",
+        "resourceseng.blob.core.windows.net",
+        "msft.spoppe.com"
+    ]
+}

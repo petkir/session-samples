@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "my-overview-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/myOverview/MyOverviewWebPart.js",
+          "manifest": "./src/webparts/myOverview/MyOverviewWebPart.manifest.json"
+        }
+      ]
+    },
+    "project-overview-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/projectOverview/ProjectOverviewWebPart.js",
+          "manifest": "./src/webparts/projectOverview/ProjectOverviewWebPart.manifest.json"
+        }
+      ]
+    },
+    "my-power-bi-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/myPowerBi/MyPowerBiWebPart.js",
+          "manifest": "./src/webparts/myPowerBi/MyPowerBiWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "MyOverviewWebPartStrings": "lib/webparts/myOverview/loc/{locale}.js",
+    "ProjectOverviewWebPartStrings": "lib/webparts/projectOverview/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "MyPowerBiWebPartStrings": "lib/webparts/myPowerBi/loc/{locale}.js"
+  }
+}
