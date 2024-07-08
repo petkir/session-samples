@@ -2,6 +2,9 @@
   "name": "qfix",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "@fluentui/react": "^8.119.0",
     "@microsoft/applicationinsights-react-js": "^17.2.0",
