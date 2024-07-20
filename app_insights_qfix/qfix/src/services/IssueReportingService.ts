@@ -1,6 +1,17 @@
 import { appInsights } from "../appInsights";
 import { getLocation } from "../helper/getLocation";
 
+export type IssueType = {
+    description: string;
+    photo: File;
+    filename: string;
+    status: string;
+    issueId: string;
+    imageLocation: string;
+    submittedLocation: string;
+  };
+
+
 class IssueReportingService {
     dbPromise: Promise<IDBDatabase>;
   
@@ -56,6 +67,26 @@ class IssueReportingService {
         console.log('Issue cached:', issueData);
         
     }
+
+    async getIssues(): Promise<IssueType[]>{
+        const db = await this.dbPromise;
+        const transaction = db.transaction('issues', 'readonly');
+        const store = transaction.objectStore('issues');
+        const issues: IssueType[] = [];
+    
+        return new Promise((resolve, reject) => {
+          store.openCursor().onsuccess = (event) => {
+            const cursor = (event.target as IDBRequest).result;
+            if (cursor) {
+              issues.push(cursor.value);
+              cursor.continue();
+            } else {
+              resolve(issues);
+            }
+          };
+        });
+      }
+    
       
       async submitIssue(description: string, photo: File) {
         const resizedPhoto = await this.resizeImageToVGA(photo);

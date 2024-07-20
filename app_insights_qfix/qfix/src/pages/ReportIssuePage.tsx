@@ -1,14 +1,17 @@
 // src/pages/ReportIssuePage.tsx
 import React, { useState } from 'react';
 import { issueReportingService } from '../services/IssueReportingService';
+import { useQFix } from '../contexts/QFixProvider';
 
 const ReportIssuePage: React.FC = () => {
+  const { incrementIssueCount} = useQFix();
   const [description, setDescription] = useState('');
   const [photo, setPhoto] = useState<File | null>(null);
 
   const handleSave = async () => {
     if (photo && description) {
       await issueReportingService.submitIssue(description, photo);
+      incrementIssueCount();
     }
   };
 

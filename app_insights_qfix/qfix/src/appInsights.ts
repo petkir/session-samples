@@ -6,10 +6,11 @@ const reactPlugin = new ReactPlugin();
 const appInsights = new ApplicationInsights({
   config: {
     connectionString: APPInsigthConnectionstring,
+    enableAutoRouteTracking: true,
     extensions: [reactPlugin],
-    extensionConfig: {
+    /*extensionConfig: {
       [reactPlugin.identifier]: { history: {} },
-    },
+    },*/
   },
 });
 

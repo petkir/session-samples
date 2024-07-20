@@ -4,6 +4,8 @@ class PositionTrackingService {
   private watchId: number | null = null;
   private trackingInterval: number | null = null;
 
+  
+
   public startTracking(interval: number = 30000) {
     if ('geolocation' in navigator) {
       this.watchId = navigator.geolocation.watchPosition(
@@ -14,7 +16,7 @@ class PositionTrackingService {
 
       this.trackingInterval = window.setInterval(() => {
         if (this.watchId !== null) {
-          navigator.geolocation.getCurrentPosition(this.handlePosition.bind(this), this.handleError.bind(this));
+          navigator.geolocation.getCurrentPosition(()=>{console.log("got it")},()=>{console.log("error")});
         }
       }, interval);
     } else {

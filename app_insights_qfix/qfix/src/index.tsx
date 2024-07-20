@@ -4,24 +4,28 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { appInsights } from './appInsights';
-import { Providers } from "@microsoft/mgt-element";
-import { Msal2Provider } from "@microsoft/mgt-msal2-provider";
+
+import { initializeIcons } from '@fluentui/font-icons-mdl2';
 
 
+
+
+initializeIcons();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-Providers.globalProvider = new Msal2Provider({
-  clientId: 'REPLACE_WITH_CLIENTID'
-});
+
+
+
+
 
 root.render(
   <React.StrictMode>
-    
+ 
     <App />
-    
+ 
   </React.StrictMode>
 );
 
