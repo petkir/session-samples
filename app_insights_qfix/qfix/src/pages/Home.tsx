@@ -16,7 +16,7 @@ const Home: React.FC = () => {
      setUser((msalInstance as any).getAllAccounts()[0]);
    
     
-  },[])
+  },[loggedInState,setLoggedInState,setUser])
 
   return (
     <Stack horizontalAlign="center" verticalAlign="center" styles={{ root: { height: 'calc( 100vh - 64px)' } }}>
