@@ -34,6 +34,10 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "build" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
+        env:
+            REACT_APP_APPINSIGHTS_CONNECTIONSTRING: ${{ secrets.REACT_APP_APPINSIGHTS_CONNECTIONSTRING }}
+            REACT_APP_ENTRAID_CLIENTID: ${{ secrets.REACT_APP_ENTRAID_CLIENTID }}
+            REACT_APP_ENTRAID_AUTHORITY: ${{ secrets.REACT_APP_ENTRAID_AUTHORITY }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
