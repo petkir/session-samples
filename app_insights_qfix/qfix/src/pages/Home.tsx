@@ -19,7 +19,7 @@ const Home: React.FC = () => {
   },[loggedInState,setLoggedInState,setUser])
 
   return (
-    <Stack horizontalAlign="center" verticalAlign="center" styles={{ root: { height: 'calc( 100vh - 64px)' } }}>
+    <Stack horizontalAlign="center" verticalAlign="center" styles={{ root: { height: 'calc( 100vh - 64px)',overflow:'hidden' } }}>
       <Text variant="xxLarge">Welcome to QFix</Text>
       <Text variant="large">Use this app to report any issues within the facility.</Text>
       <Toggle onChange={()=>setDebug(!debug)} checked={debug} inlineLabel={true} label={debug ? 'Show Configuration enabled' : 'Show Configuration disabled'} />
