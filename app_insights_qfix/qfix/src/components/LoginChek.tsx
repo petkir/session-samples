@@ -5,7 +5,7 @@ import { issueReportingService } from "../services/IssueReportingService";
 
 
 export  const LoginCheck: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const { user, setUser,loggedInState, setLoggedInState,setIssueCount } = useQFix();
+    const {  setUser,loggedInState, setLoggedInState,setIssueCount } = useQFix();
   useEffect(() => {
 
     issueReportingService.getUnsyncedIssues().then((issues) => {
@@ -19,7 +19,7 @@ export  const LoginCheck: React.FC<{ children: ReactNode }> = ({ children }) => 
     setUser((msalInstance as any).getAllAccounts()[0]);
   
    
- },[loggedInState,setLoggedInState,setUser])
+ },[loggedInState,setLoggedInState,setUser,setIssueCount]);
       
         return (
           <>

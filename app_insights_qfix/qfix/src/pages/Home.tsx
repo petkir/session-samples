@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import {  Stack, Text, Toggle } from '@fluentui/react';
 import { APPInsigthConnectionstring, EntraIDClientID } from '../config';
 

@@ -121,7 +121,7 @@ class IssueReportingService {
         let haserror=false;
         for (const issue of issues) {
           try {
-            const issueId = await this.submitToApi(issue.description, issue.photo,issue.photoPosition,issue.submitPosition);
+            await this.submitToApi(issue.description, issue.photo,issue.photoPosition,issue.submitPosition);
             
           } catch (error) {
             haserror=true;

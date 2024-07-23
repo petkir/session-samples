@@ -11,7 +11,7 @@ import { positionTrackingService } from './services/PositionTrackingService';
 import ReportIssuePage from './pages/ReportIssuePage';
 import { ThemeProvider } from './contexts/ThemeProvider';
 import { msalInstance } from './entraID';
-import { QFixProvider, useQFix } from './contexts/QFixProvider';
+import { QFixProvider } from './contexts/QFixProvider';
 import { Stack } from '@fluentui/react';
 import LocalIssuesPage from './pages/LocalIssuesPage';
 import { LoginCheck } from './components/LoginChek';
