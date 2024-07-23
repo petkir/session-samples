@@ -5,15 +5,15 @@ export type IssueType = {
     description: string;
     photo: File;
     filename: string;
-    status: string;
     issueId: string;
-    imageLocation: string;
-    submittedLocation: string;
+    photoPosition: string;
+    submitPosition: string;
   };
 
 
 class IssueReportingService {
     dbPromise: Promise<IDBDatabase>;
+    
   
     constructor() {
       this.dbPromise = new Promise((resolve, reject) => {
@@ -52,7 +52,7 @@ class IssueReportingService {
         return file;
       }
 
-      async cacheIssue(description: string, photo: Blob, status: string = 'new', issueId: string = '') {
+      async cacheIssue(description: string, photo: Blob, status: string = 'new', issueId: string = '',photoPosition: string, submitPosition: string) {
         const db = await this.dbPromise;
         const transaction = db.transaction('issues', 'readwrite');
         const store = transaction.objectStore('issues');
@@ -61,7 +61,9 @@ class IssueReportingService {
         const photoFile = await this.blobToFile(photo, "resizedPhoto.jpg");
         const filename = photoFile.name; // Extract the filename from the File object
     
-        const issueData = { description, photo: photoFile, filename, status, issueId };
+        const issueData = { description, photo: photoFile, filename, status, issueId , 
+          photoPosition: JSON.stringify(photoPosition), 
+          submitPosition: JSON.stringify(submitPosition)};
         store.add(issueData);
     
         console.log('Issue cached:', issueData);
@@ -87,37 +89,66 @@ class IssueReportingService {
         });
       }
     
+      async getUnsyncedIssues(): Promise<IssueType[]>{
+        const db = await this.dbPromise;
+        const transaction = db.transaction('issues', 'readonly');
+        const store = transaction.objectStore('issues');
+        const issues: IssueType[] = [];
+        return new Promise((resolve, reject) => {
+          store.openCursor().onsuccess = (event) => {
+            const cursor = (event.target as IDBRequest).result;
+            if (cursor) {
+              if(cursor.value.issueId === ''){
+              issues.push(cursor.value);
+              }
+              cursor.continue();
+            } else {
+              resolve(issues);
+            }
+          };
+        });
+      }
       
-      async submitIssue(description: string, photo: File) {
+      async submitIssue(description: string, photo: File, photoPosition: string, submitPosition: string) {
         const resizedPhoto = await this.resizeImageToVGA(photo);
       
-        if (navigator.onLine) {
-          console.log('Device is online, submitting issue...');
-          // Implement API submission logic here
-          // Assuming submitToApi returns a Promise with the issue ID on success
+        await this.cacheIssue(description, resizedPhoto, 'uploaded', '',photoPosition,submitPosition);
+      
+      }
+
+      async submitCachedIssues() {
+        const issues = await this.getUnsyncedIssues();
+        let haserror=false;
+        for (const issue of issues) {
           try {
-           
-            const issueId = await this.submitToApi(description, resizedPhoto);
-            console.log(`Issue submitted successfully, ID: ${issueId}`);
-            await this.cacheIssue(description, resizedPhoto, 'uploaded', issueId);
+            const issueId = await this.submitToApi(issue.description, issue.photo,issue.photoPosition,issue.submitPosition);
+            
           } catch (error) {
-            console.error('Failed to submit issue:', error);
-            // Optionally, cache the issue as 'waiting' or another status on failure
+            haserror=true;
+            console.error('Error submitting issue:', error);
           }
-        } else {
-          console.log('Device is offline, caching issue...');
-          await this.cacheIssue(description, resizedPhoto);
         }
+        if(!haserror){
+          this.cleanCache();
+        }
+      }
+
+      async cleanCache() {
+        const db = await this.dbPromise;
+        const transaction = db.transaction('issues', 'readwrite');
+        const store = transaction.objectStore('issues');
+        store.clear();
       }
       
       // Placeholder for the actual API submission logic
-      async submitToApi(description: string, photo: Blob): Promise<string> {
-        // Simulate API call
-        this.submitPosition('submittingPosition');
-
-        this.submitPosition('submitedPosition');
+      async submitToApi(description: string, photo: Blob,photoPosition:string,submitPosition:string): Promise<string> {
        
-        return 'simulated-issue-id'; // Return a simulated issue ID
+       return new Promise((resolve,reject) => {
+        this.submitPosition('submitedPosition');
+        reject('storedata');
+        //resolve( 'simulated-issue-id');
+        });
+
       }
 
       async submitPosition(areaName:string) {

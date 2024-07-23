@@ -70,7 +70,7 @@ const Header: React.FC = () => {
     },
     {
       key: 'report-issue',
-      text: 'report-issue',
+      text: 'New Report',
       iconProps: { iconName: 'IconsFilled' },
       
       onClick: (ev) => {ev?.stopPropagation(); 
@@ -78,7 +78,7 @@ const Header: React.FC = () => {
     },
     {
       key: 'unsubmitted-issue',
-      text: 'unsubmitted-issue',
+      text: 'Requests',
       iconProps: { iconName: 'IconsFilled' },
       onClick: (ev) => {ev?.stopPropagation(); 
         navigate('/unsubmitted-issue')},

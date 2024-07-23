@@ -4,19 +4,13 @@ import { APPInsigthConnectionstring, EntraIDClientID } from '../config';
 
 import { msalInstance } from '../entraID';
 import { useQFix } from '../contexts/QFixProvider';
+import { appInsightUserSet } from '../appInsights';
 
 const Home: React.FC = () => {
   const [debug,setDebug] = useState(false);
   const { user, setUser,loggedInState, setLoggedInState } = useQFix();
   
-  useEffect(() => {
-     if((msalInstance as any).getAllAccounts()>0 && loggedInState ===0){
-     
-    }  setLoggedInState(1);
-     setUser((msalInstance as any).getAllAccounts()[0]);
-   
-    
-  },[loggedInState,setLoggedInState,setUser])
+  
 
   return (
     <Stack horizontalAlign="center" verticalAlign="center" styles={{ root: { height: 'calc( 100vh - 64px)',overflow:'hidden' } }}>
@@ -31,18 +25,15 @@ const Home: React.FC = () => {
        <div>
        {loggedInState ===0 && <button onClick={async ():Promise<void> => {
           try {
-            
-            debugger;
             const loginResponse = await msalInstance.loginPopup();
             
             setLoggedInState(loginResponse.account ? 1 : 0);
             setUser(loginResponse.account);
+            appInsightUserSet(loginResponse.account.homeAccountId);
             
         } catch (err) {
-            // handle error
-
             console.error(err);
-            debugger;
+            
         }
 
         }}>Login</button>

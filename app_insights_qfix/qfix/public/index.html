@@ -15,29 +15,212 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+   <style>
+/* Fonts */
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+/* Variables */
+
+$pink:#f98db9;
+$blue:#97ddff;
+$yellow:#ffcd66;
+$font:'Montserrat', sans-serif;
+$heading:rgb(87, 110, 129);
+$sub:#F98DB9;
+
+/* Mixins */
+
+@mixin center{
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin:auto;
+}
+
+@mixin hole{
+  border-radius:100%;
+  background:white;
+  position: absolute;
+}
+
+body{
+  height:100vh;
+  font-family:$font;
+  text-align:center;
+  overflow:hidden;
+  h1{
+    text-transform:uppercase;
+    font-size:30px;
+    color:$heading;
+    margin:30px 0px 0px 0px;
+  }
+  h2{
+    font-weight:normal;
+    font-size:18px;
+    color:$sub;
+    margin:10px 0px 0px 0px;
+  }
+  p{
+    margin:0 auto;
+  }
+  .loader{
+    height:100%;
+    position:relative;
+    margin:auto;
+    width:400px;
+    &_overlay{
+      width:150px;
+      height:150px;
+      background:transparent;
+      box-shadow:0px 0px 0px 1000px rgba(255, 255, 255, 0.67), 0px 0px 19px 0px rgba(0, 0, 0, 0.16) inset;
+      border-radius:100%;
+      z-index:-1;
+      @include center;
+    }
+    &_cogs{
+      z-index:-2;
+      width:100px;
+      height:100px;
+      top: -120px !important;
+      @include center;
+      &__top{
+        position:relative;
+        width:100px;
+        height:100px;
+        transform-origin: 50px 50px;
+        animation:rotate 10s infinite linear;
+        @for $i from 1 through 3{
+          div:nth-of-type(#{$i}){
+            transform:rotate($i * 30deg)
+          }
+        }
+        div.top_part{
+          width:100px;
+          border-radius:10px;
+          position:absolute;
+          height:100px;
+          background:$pink;
+        }
+        div.top_hole{
+          width:50px;
+          height:50px;
+          @include hole;
+          @include center;
+        }
+      }
+      &__left{
+        position: relative;
+        width: 80px;
+        transform: rotate(16deg);
+        top: 28px;
+        transform-origin: 40px 40px;
+        animation:rotate_left 10s .1s infinite reverse linear;
+        left: -24px;
+        height: 80px;
+        @for $i from 1 through 3{
+          div:nth-of-type(#{$i}){
+            transform:rotate($i * 30deg)
+          }
+        }
+        div.left_part{
+          width:80px;
+          border-radius:6px;
+          position:absolute;
+          height:80px;
+          background:$blue;
+        }
+        div.left_hole{
+          width:40px;
+          height:40px;
+          @include hole;
+          @include center;
+        }
+      }
+      &__bottom{
+        position: relative;
+        width: 60px;
+        top: -65px;
+        transform-origin: 30px 30px;
+        animation:rotate_left 10.2s .4s infinite linear;
+        transform: rotate(4deg);
+        left: 79px;
+        height: 60px;
+        @for $i from 1 through 3{
+          div:nth-of-type(#{$i}){
+            transform:rotate($i * 30deg)
+          }
+        }
+        div.bottom_part{
+          width:60px;
+          border-radius:5px;
+          position:absolute;
+          height:60px;
+          background:$yellow;
+        }
+        div.bottom_hole{
+          width:30px;
+          height:30px;
+          @include hole;
+          @include center;
+        }
+      }
+    }
+  }
+}
+
+/* Animations */
+
+@keyframes rotate{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+@keyframes rotate_left{
+  from{transform:rotate(16deg)}
+  to{transform:rotate(376deg)}
+}
+
+@keyframes rotate_right{
+  from{transform:rotate(4deg)}
+  to{transform:rotate(364deg)}
+}
+   </style>
+    <title>QFix</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <div id="root">
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+      <div class='loader'>
+        <div class='loader_overlay'></div>
+        <div class='loader_cogs'>
+          <div class='loader_cogs__top'>
+            <div class='top_part'></div>
+            <div class='top_part'></div>
+            <div class='top_part'></div>
+            <div class='top_hole'></div>
+          </div>
+          <div class='loader_cogs__left'>
+            <div class='left_part'></div>
+            <div class='left_part'></div>
+            <div class='left_part'></div>
+            <div class='left_hole'></div>
+          </div>
+          <div class='loader_cogs__bottom'>
+            <div class='bottom_part'></div>
+            <div class='bottom_part'></div>
+            <div class='bottom_part'></div>
+            <div class='bottom_hole'><!-- lol --></div>
+          </div>
+          <p>loading</p>
+        </div>
+      </div>
+      
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    </div>
+   
   </body>
 </html>
