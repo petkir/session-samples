@@ -62,8 +62,8 @@ class IssueReportingService {
         const filename = photoFile.name; // Extract the filename from the File object
     
         const issueData = { description, photo: photoFile, filename, status, issueId , 
-          photoPosition: JSON.stringify(photoPosition), 
-          submitPosition: JSON.stringify(submitPosition)};
+          photoPosition: photoPosition, 
+          submitPosition: submitPosition};
         store.add(issueData);
     
         console.log('Issue cached:', issueData);

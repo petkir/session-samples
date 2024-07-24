@@ -15,6 +15,8 @@ import { QFixProvider } from './contexts/QFixProvider';
 import { Stack } from '@fluentui/react';
 import LocalIssuesPage from './pages/LocalIssuesPage';
 import { LoginCheck } from './components/LoginChek';
+import Datenschutz from './pages/Datenschutz';
+import Footer from './components/Footer';
 
 
 
@@ -42,13 +44,15 @@ const App: React.FC = () => {
     <QFixProvider>
       <LoginCheck>
   <Header />
-  {init&&<Stack horizontalAlign="center" verticalAlign="center" >
+  {init&&<Stack horizontalAlign="center" verticalAlign="center"  styles={{ root: { height: 'calc( 100vh - 116px)',overflowY:'scroll' } }} >
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/report-issue" element={<ReportIssuePage />} />
         <Route path="/unsubmitted-issue" element={<LocalIssuesPage   />} />
+        <Route path="/datenrichtlinie" element={<Datenschutz   />} />
       </Routes>
       </Stack>}
+      <Footer />
       </LoginCheck>
       </QFixProvider>
     </BrowserRouter>
