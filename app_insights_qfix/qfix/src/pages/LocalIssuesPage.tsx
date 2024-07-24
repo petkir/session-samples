@@ -38,9 +38,9 @@ const LocalIssuesPage = () => {
             <span>{index}</span>
             <h2>{item.description}</h2>
             <img height={'60px'} src={URL.createObjectURL(item.photo)} alt={item.filename} />
-            {pos1 && <div><a target="_blank"  rel="noreferrer"  href={`https://www.google.com/maps/search/?api=1&query=${pos1?.coords?.latitude},${pos1?.coords?.longitude}`} ><span>photoPosition</span></a></div>}
+            {pos1 && <div><a target="_blank"  rel="noreferrer"  href={`https://www.google.com/maps/search/?api=1&query=${pos1?.coords?.latitude},${pos1?.coords?.longitude}`} ><span>photoPosition Maps</span></a></div>}
             <pre dangerouslySetInnerHTML={{__html:syntaxHighlight(pos1)}} />
-            {pos2 && <div><a target="_blank"  rel="noreferrer"  href={`https://www.google.com/maps/search/?api=1&query=${pos2?.coords?.latitude},${pos2?.coords?.longitude}`} ><span>submitPosition</span></a></div>}
+            {pos2 && <div><a target="_blank"  rel="noreferrer"  href={`https://www.google.com/maps/search/?api=1&query=${pos2?.coords?.latitude},${pos2?.coords?.longitude}`} ><span>submitPosition Maps</span></a></div>}
             <pre dangerouslySetInnerHTML={{__html:syntaxHighlight(pos2)}} />
           </div>
         );
