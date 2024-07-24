@@ -1,6 +1,6 @@
 import React, {  useState } from 'react';
 import {  Stack, Text, Toggle } from '@fluentui/react';
-import { APPInsigthConnectionstring, EntraIDClientID } from '../config';
+import { APPInsigthConnectionstring, EntraIDAuthority, EntraIDClientID } from '../config';
 
 import { msalInstance } from '../entraID';
 import { useQFix } from '../contexts/QFixProvider';
@@ -18,12 +18,13 @@ const Home: React.FC = () => {
       <Text variant="large">Use this app to report any issues within the facility.</Text>
       <Toggle onChange={()=>setDebug(!debug)} checked={debug} inlineLabel={true} label={debug ? 'Show Configuration enabled' : 'Show Configuration disabled'} />
       {debug && <p>
-      <Text variant="large">{EntraIDClientID}</Text><br />
-      <Text variant="large">{APPInsigthConnectionstring}</Text>
-      <Text variant="large">{JSON.stringify(user)}</Text>
+      <Text variant="large">EntraIDClientID:</Text><Text>{EntraIDClientID}</Text><br />
+      <Text variant="large">EntraIDAuthority</Text><Text>{EntraIDAuthority}</Text>
+      <Text variant="large">APPInsigthConnectionString:</Text><Text>{APPInsigthConnectionstring}</Text>
+      <Text variant="large">User</Text><Text>{JSON.stringify(user)}</Text>
       </p>}
        <div>
-       {loggedInState ===0 && <button onClick={async ():Promise<void> => {
+       {(loggedInState ===0 || msalInstance.getAllAccounts().length ===0 )&& <button onClick={async ():Promise<void> => {
           try {
             const loginResponse = await msalInstance.loginPopup();
             
