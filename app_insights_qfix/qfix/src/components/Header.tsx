@@ -55,7 +55,7 @@ const classNames = mergeStyleSets({
 const Header: React.FC = () => {
   console.log('Header');
 
-  const { isDarkTheme, toggleTheme, getInverseTheme } = useTheme(); 
+  const { isDarkTheme, toggleTheme } = useTheme(); 
   const { user,issueCount } = useQFix();
   
   const navigate = useNavigate();
