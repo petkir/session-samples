@@ -6,7 +6,7 @@ import { mergeStyleSets } from '@fluentui/react/lib/Styling';
 import { Toggle, DefaultButton, FontIcon, OverflowSet, IOverflowSetItemProps, IconButton, IButtonStyles } from '@fluentui/react';
 
 import { useTheme } from '../contexts/ThemeProvider';
-import { useQFix} from '../contexts/QFixProvider';
+import { useQFix } from '../contexts/QFixProvider';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -14,7 +14,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const classNames = mergeStyleSets({
   container: {
-    
+
     padding: '10px 30px',
     backgroundColor: '#0078d4',
     color: 'white',
@@ -31,7 +31,7 @@ const classNames = mergeStyleSets({
   switchLabel: {
     marginLeft: '10px',
   },
-  badge :{
+  badge: {
     backgroundColor: 'red',
     color: 'white',
     width: '20px',
@@ -43,9 +43,9 @@ const classNames = mergeStyleSets({
     display: 'inline-block',
     position: 'absolute',
     top: '0',
-  
+
   },
-  badgecontainer: { 
+  badgecontainer: {
     display: 'inline-block',
     position: 'relative',
     marginLeft: '20px',
@@ -55,9 +55,9 @@ const classNames = mergeStyleSets({
 const Header: React.FC = () => {
   console.log('Header');
 
-  const { isDarkTheme, toggleTheme } = useTheme(); 
-  const { user,issueCount } = useQFix();
-  
+  const { isDarkTheme, toggleTheme } = useTheme();
+  const { user, issueCount } = useQFix();
+
   const navigate = useNavigate();
   const items: IOverflowSetItemProps[] = [
     {
@@ -65,60 +65,63 @@ const Header: React.FC = () => {
       text: 'Home',
       iconProps: { iconName: 'Home' },
       onClick: () => {
-        navigate('/')},
+        navigate('/')
+      },
     },
     {
       key: 'report-issue',
       text: 'New Report',
       iconProps: { iconName: 'IconsFilled' },
-      
+
       onClick: () => {
-        navigate('/report-issue')},
+        navigate('/report-issue')
+      },
     },
     {
       key: 'unsubmitted-issue',
       text: 'Requests',
       iconProps: { iconName: 'IconsFilled' },
-      onClick: () => { 
-        navigate('/unsubmitted-issue')},
-    
+      onClick: () => {
+        navigate('/unsubmitted-issue')
+      },
+
     },
   ];
   const onRenderItem = (item: IOverflowSetItemProps): JSX.Element => {
     return (
-     
-      <Link style={{paddingRight:'20px'}} to={'/'+item.key} onClick={item.onClick}>
+
+      <Link style={{ paddingRight: '20px' }} to={'/' + item.key} onClick={item.onClick}>
         {item.text}
       </Link>
     );
   };
-  
+
   return (
     <>
-    <div className={classNames.container}>
-      <div>QFix</div>
-      
-      <div className={classNames.switchContainer}>
-        <Toggle onChange={toggleTheme} checked={isDarkTheme} onText='Dark Mode' offText='Light Mode' />
-      </div>
-      <div>
-      
-        <DefaultButton text={user?.name}/>
-        <div className={classNames.badgecontainer} >
-        <FontIcon iconName='Dictionary' />
-        <span className={classNames.badge}>{issueCount}</span>
+      <div className={classNames.container}>
+        <div>QFix</div>
+
+        <div className={classNames.switchContainer}>
+          <Toggle onChange={toggleTheme} checked={isDarkTheme} onText='Dark Mode' offText='Light Mode' />
         </div>
-        
+        <div>
+
+          <DefaultButton text={user?.name} />
+          <div className={classNames.badgecontainer} >
+            <FontIcon iconName='Dictionary' />
+            <span className={classNames.badge}>{issueCount}</span>
+          </div>
+
+        </div>
       </div>
-    </div>
-    <div className={classNames.container}>
-      <OverflowSet
-      
-      items={items}
-      role='menu'
-      onRenderOverflowButton={onRenderOverflowButton}
-    onRenderItem={onRenderItem}
-      />
+      <div className={classNames.container}>
+        <OverflowSet
+
+          items={items}
+          role='menu'
+          onRenderOverflowButton={onRenderOverflowButton}
+          onRenderItem={onRenderItem}
+        />
       </div>
     </>
   );

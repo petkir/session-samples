@@ -4,8 +4,8 @@ import { createTheme, ThemeProvider as FluentThemeProvider, Theme } from '@fluen
 type ThemeContextType = {
   isDarkTheme: boolean;
   toggleTheme: () => void;
-  getTheme :() =>  Theme
-  getInverseTheme : () => Theme;
+  getTheme: () => Theme
+  getInverseTheme: () => Theme;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -71,14 +71,14 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     setIsDarkTheme(!isDarkTheme);
   };
   const getTheme = () => {
-   return isDarkTheme ? darkTheme : lightTheme 
+    return isDarkTheme ? darkTheme : lightTheme
   };
   const getInverseTheme = () => {
-    return !isDarkTheme ? darkTheme : lightTheme 
-   };
+    return !isDarkTheme ? darkTheme : lightTheme
+  };
 
   return (
-    <ThemeContext.Provider value={{ isDarkTheme, toggleTheme ,getTheme,getInverseTheme}}>
+    <ThemeContext.Provider value={{ isDarkTheme, toggleTheme, getTheme, getInverseTheme }}>
       <FluentThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
         {children}
       </FluentThemeProvider>

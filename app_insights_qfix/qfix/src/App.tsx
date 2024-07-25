@@ -1,4 +1,4 @@
-import React, {  useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -21,8 +21,8 @@ import Footer from './components/Footer';
 
 
 const App: React.FC = () => {
-  const[init, setInit] = React.useState(false);
- 
+  const [init, setInit] = React.useState(false);
+
 
   useEffect(() => {
     async function initApp() {
@@ -39,27 +39,27 @@ const App: React.FC = () => {
   return (
     <AppInsightsErrorBoundary onError={() => <h1>I believe something went wrong</h1>} appInsights={reactPlugin}>
       <AppInsightsContext.Provider value={reactPlugin}>
-    <ThemeProvider>
-    <BrowserRouter>
-    <QFixProvider>
-      <LoginCheck>
-  <Header />
-  {init&&<Stack horizontalAlign="center" verticalAlign="center"  styles={{ root: { height: 'calc( 100vh - 160px)',overflowY:'scroll' } }} >
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/report-issue" element={<ReportIssuePage />} />
-        <Route path="/unsubmitted-issue" element={<LocalIssuesPage   />} />
-        <Route path="/datenrichtlinie" element={<Datenschutz   />} />
-      </Routes>
-      </Stack>}
-      <Footer />
-      </LoginCheck>
-      </QFixProvider>
-    </BrowserRouter>
-  </ThemeProvider>
-  </AppInsightsContext.Provider>
-  </AppInsightsErrorBoundary>
-  
+        <ThemeProvider>
+          <BrowserRouter>
+            <QFixProvider>
+              <LoginCheck>
+                <Header />
+                {init && <Stack horizontalAlign="center" verticalAlign="center" styles={{ root: { height: 'calc( 100vh - 160px)', overflowY: 'scroll' } }} >
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/report-issue" element={<ReportIssuePage />} />
+                    <Route path="/unsubmitted-issue" element={<LocalIssuesPage />} />
+                    <Route path="/datenrichtlinie" element={<Datenschutz />} />
+                  </Routes>
+                </Stack>}
+                <Footer />
+              </LoginCheck>
+            </QFixProvider>
+          </BrowserRouter>
+        </ThemeProvider>
+      </AppInsightsContext.Provider>
+    </AppInsightsErrorBoundary>
+
   );
 };
 

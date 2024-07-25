@@ -4,7 +4,7 @@ class PositionTrackingService {
   private watchId: number | null = null;
   private trackingInterval: number | null = null;
 
-  
+
 
   public startTracking(interval: number = 30000) {
     if ('geolocation' in navigator) {
@@ -14,7 +14,7 @@ class PositionTrackingService {
         { enableHighAccuracy: false, timeout: 10000, maximumAge: 0 }
       );
 
-      
+
     } else {
       console.error('Geolocation is not supported by this browser.');
     }
@@ -23,15 +23,15 @@ class PositionTrackingService {
   public getCurrentPosition() {
     return new Promise<GeolocationPosition>((resolve, reject) => {
       if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition((pos)=>{
-          
-            const crd = pos.coords;
-          
-            console.log("Your current position is:");
-            console.log(`Latitude : ${crd.latitude}`);
-            console.log(`Longitude: ${crd.longitude}`);
-            console.log(`More or less ${crd.accuracy} meters.`);
-            resolve(pos);
+        navigator.geolocation.getCurrentPosition((pos) => {
+
+          const crd = pos.coords;
+
+          console.log("Your current position is:");
+          console.log(`Latitude : ${crd.latitude}`);
+          console.log(`Longitude: ${crd.longitude}`);
+          console.log(`More or less ${crd.accuracy} meters.`);
+          resolve(pos);
         }, (err) => {
           console.warn(`ERROR(${err.code}): ${err.message}`);
           reject(err);
