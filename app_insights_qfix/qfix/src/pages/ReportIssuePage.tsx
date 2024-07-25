@@ -28,7 +28,7 @@ const ReportIssuePage: React.FC = () => {
   return (
     <Stack horizontalAlign="center" verticalAlign="center" styles={{ root: { height: 'calc( 100vh - 64px)',overflow:'hidden' } }}>
       <div>
-      <input ref={fileInput} type="file" accept="image/*;capture=camera"  onChange={(e) => 
+      <input ref={fileInput} type="file" accept="image/*" capture="environment"  onChange={(e) => 
         {
         setPhoto(e.target.files?.[0] || null);
         setPhotoPosition(localStorage.getItem('position'));

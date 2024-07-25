@@ -5,6 +5,7 @@ import { APPInsigthConnectionstring, EntraIDAuthority, EntraIDClientID } from '.
 import { msalInstance } from '../entraID';
 import { useQFix } from '../contexts/QFixProvider';
 import { appInsightUserSet } from '../appInsights';
+import { syntaxHighlight } from '../helper/syntaxHighlight';
 
 const Home: React.FC = () => {
   const [debug,setDebug] = useState(false);
@@ -21,7 +22,7 @@ const Home: React.FC = () => {
       <Text variant="large">EntraIDClientID:</Text><Text>{EntraIDClientID}</Text><br />
       <Text variant="large">EntraIDAuthority</Text><Text>{EntraIDAuthority}</Text>
       <Text variant="large">APPInsigthConnectionString:</Text><Text>{APPInsigthConnectionstring}</Text>
-      <Text variant="large">User</Text><Text>{JSON.stringify(user)}</Text>
+      <Text variant="large">User</Text><Text><pre dangerouslySetInnerHTML={{__html:syntaxHighlight(user)}} /></Text>
       </p>}
        <div>
        {(loggedInState ===0 || msalInstance.getAllAccounts().length ===0 )&& <button onClick={async ():Promise<void> => {
