@@ -44,7 +44,7 @@ const App: React.FC = () => {
     <QFixProvider>
       <LoginCheck>
   <Header />
-  {init&&<Stack horizontalAlign="center" verticalAlign="center"  styles={{ root: { height: 'calc( 100vh - 116px)',overflowY:'scroll' } }} >
+  {init&&<Stack horizontalAlign="center" verticalAlign="center"  styles={{ root: { height: 'calc( 100vh - 160px)',overflowY:'scroll' } }} >
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/report-issue" element={<ReportIssuePage />} />

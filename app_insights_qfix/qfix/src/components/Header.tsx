@@ -1,14 +1,13 @@
 import React from 'react';
-import { CommandBar, ICommandBarItemProps } from '@fluentui/react/lib/CommandBar';
 import { mergeStyleSets } from '@fluentui/react/lib/Styling';
 
 
 
-import { Toggle, DefaultButton, FontIcon } from '@fluentui/react';
+import { Toggle, DefaultButton, FontIcon, OverflowSet, IOverflowSetItemProps, IconButton, IButtonStyles } from '@fluentui/react';
 
 import { useTheme } from '../contexts/ThemeProvider';
 import { useQFix} from '../contexts/QFixProvider';
-import {  useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -56,16 +55,16 @@ const classNames = mergeStyleSets({
 const Header: React.FC = () => {
   console.log('Header');
 
-  const { isDarkTheme, toggleTheme } = useTheme(); 
+  const { isDarkTheme, toggleTheme, getInverseTheme } = useTheme(); 
   const { user,issueCount } = useQFix();
   
   const navigate = useNavigate();
-  const items: ICommandBarItemProps[] = [
+  const items: IOverflowSetItemProps[] = [
     {
       key: 'home',
       text: 'Home',
       iconProps: { iconName: 'Home' },
-      onClick: (ev) => {ev?.stopPropagation(); 
+      onClick: () => {
         navigate('/')},
     },
     {
@@ -73,24 +72,32 @@ const Header: React.FC = () => {
       text: 'New Report',
       iconProps: { iconName: 'IconsFilled' },
       
-      onClick: (ev) => {ev?.stopPropagation(); 
+      onClick: () => {
         navigate('/report-issue')},
     },
     {
       key: 'unsubmitted-issue',
       text: 'Requests',
       iconProps: { iconName: 'IconsFilled' },
-      onClick: (ev) => {ev?.stopPropagation(); 
+      onClick: () => { 
         navigate('/unsubmitted-issue')},
     
     },
   ];
-  
+  const onRenderItem = (item: IOverflowSetItemProps): JSX.Element => {
+    return (
+     
+      <Link style={{paddingRight:'20px'}} to={'/'+item.key} onClick={item.onClick}>
+        {item.text}
+      </Link>
+    );
+  };
   
   return (
+    <>
     <div className={classNames.container}>
       <div>QFix</div>
-      <CommandBar items={items} />
+      
       <div className={classNames.switchContainer}>
         <Toggle onChange={toggleTheme} checked={isDarkTheme} onText='Dark Mode' offText='Light Mode' />
       </div>
@@ -104,7 +111,37 @@ const Header: React.FC = () => {
         
       </div>
     </div>
+    <div className={classNames.container}>
+      <OverflowSet
+      
+      items={items}
+      role='menu'
+      onRenderOverflowButton={onRenderOverflowButton}
+    onRenderItem={onRenderItem}
+      />
+      </div>
+    </>
   );
 };
 
+
+
+const onRenderOverflowButton = (overflowItems: any[] | undefined): JSX.Element => {
+  const buttonStyles: Partial<IButtonStyles> = {
+    root: {
+      minWidth: 0,
+      padding: '0 4px',
+      alignSelf: 'stretch',
+      height: 'auto',
+    },
+  };
+  return (
+    <IconButton
+      title="More options"
+      styles={buttonStyles}
+      menuIconProps={{ iconName: 'More' }}
+      menuProps={{ items: overflowItems! }}
+    />
+  );
+};
 export default Header;
