@@ -8,6 +8,7 @@
   "dependencies": {
     "@azure/msal-browser": "^3.19.1",
     "@azure/msal-react": "^2.0.21",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@fluentui/react": "^8.119.0",
     "@microsoft/applicationinsights-react-js": "^17.2.0",
     "@microsoft/applicationinsights-web": "^3.2.2",
