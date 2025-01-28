@@ -19,6 +19,12 @@ const appInsights = new ApplicationInsights({
 appInsights.addTelemetryInitializer((envelope) => {
   envelope.data = envelope.data || {};
   envelope.tags = envelope.tags || {};
+  envelope.data.userInfo= {
+   upn: window.localStorage.getItem('upn') || "",
+   office: window.localStorage.getItem('office') || "",
+   company: window.localStorage.getItem('company') || ""
+  }
+  
   envelope.tags['ai.cloud.role'] = 'SPA';
   envelope.tags["ai.cloud.roleInstance"] = "QFix";
   envelope.data.location = window.localStorage.getItem('position') || "";
