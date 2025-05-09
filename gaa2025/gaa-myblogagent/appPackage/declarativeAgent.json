@@ -14,13 +14,16 @@
     ],
     "conversation_starters": [
         {
-            "text": "Write a blog post about the importance of mental health!"
+            "text": "Write a blog post about the importance of mental health!",
+            "title": "Mental Health Awareness"
        },
         {
-            "text": "Create a blog post on the latest trends in technology."
+            "text": "Create a blog post on the latest trends in technology.",
+            "title": "Tech Trends"
         },
         {
-            "text": "Draft a blog post about healthy eating habits."
+            "text": "Draft a blog post about healthy eating habits.",
+            "title": "Healthy Eating"
         }
     ]
 }
