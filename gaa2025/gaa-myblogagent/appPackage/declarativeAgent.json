@@ -1,0 +1,29 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.3/schema.json",
+    "version": "v1.3",
+    "name": "gaa-myblogagent",
+    "description": "This agent helps to write Blogs Posts",
+    "instructions": "$[file('instruction.txt')]",
+    "capabilities": [
+       {
+            "name": "GraphicArt"
+       },
+       {
+            "name": "CodeInterpreter"
+      }
+    ],
+    "conversation_starters": [
+        {
+            "text": "Write a blog post about the importance of mental health!"
+       },
+        {
+            "text": "Create a blog post on the latest trends in technology."
+        },
+        {
+            "text": "Draft a blog post about healthy eating habits."
+        }
+    ]
+}
+
+
+
