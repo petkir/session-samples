@@ -1,0 +1,45 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "hello-world-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/helloWorld/HelloWorldWebPart.js",
+          "manifest": "./src/webparts/helloWorld/HelloWorldWebPart.manifest.json"
+        }
+      ]
+    },
+    "spfx-headerfooter-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/spfxHeaderfooter/SpfxHeaderfooterApplicationCustomizer.js",
+          "manifest": "./src/extensions/spfxHeaderfooter/SpfxHeaderfooterApplicationCustomizer.manifest.json"
+        }
+      ]
+    },
+    "statistics-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/statistics/StatisticsApplicationCustomizer.js",
+          "manifest": "./src/extensions/statistics/StatisticsApplicationCustomizer.manifest.json"
+        }
+      ]
+    },
+    "sb-gcommand-command-set": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/sbGcommand/SbGcommandCommandSet.js",
+          "manifest": "./src/extensions/sbGcommand/SbGcommandCommandSet.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "HelloWorldWebPartStrings": "lib/webparts/helloWorld/loc/{locale}.js",
+    "SpfxHeaderfooterApplicationCustomizerStrings": "lib/extensions/spfxHeaderfooter/loc/{locale}.js",
+    "StatisticsApplicationCustomizerStrings": "lib/extensions/statistics/loc/{locale}.js",
+    "SbGcommandCommandSetStrings": "lib/extensions/sbGcommand/loc/{locale}.js"
+  }
+}

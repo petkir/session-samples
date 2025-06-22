@@ -1,0 +1,45 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/spfx-serve.schema.json",
+  "port": 4321,
+  "https": true,
+  "initialPage": "https://acpcubidodev.sharepoint.com/sites/Infinity365/_layouts/workbench.aspx",
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://acpcubidodev.sharepoint.com/sites/Infinity365/_layouts/workbench.aspx",
+    },
+    "spfxHeaderfooter": {
+      "pageUrl": "https://acpcubidodev.sharepoint.com/sites/Infinity365/SitePages/CollabHome.aspx",
+      "customActions": {
+        "9c5b1138-d784-49fc-a76b-406dfbb60f9c": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
+    },
+    "statistics": {
+      "pageUrl": "https://acpcubidodev.sharepoint.com/sites/Infinity365/SitePages/CollabHome.aspx",
+      "customActions": {
+        "dc52ff60-0181-48c1-bb03-efd0f9aeff7c": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
+    },
+    "sbGcommand": {
+      "pageUrl": "https://acpcubidodev.sharepoint.com/sites/Infinity365/Shared%20Documents/Forms/AllItems.aspx",
+      "customActions": {
+        "4d618723-f79e-4154-aa0a-8f95c3ab4ec0": {
+          "location": "ClientSideExtension.ListViewCommandSet.CommandBar",
+          "properties": {
+            "sampleTextOne": "One item is selected in the list",
+            "sampleTextTwo": "This command is always visible."
+          }
+        }
+      }
+    }
+  }
+}

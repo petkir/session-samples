@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <CustomAction
+        Title="SpfxHeaderfooter"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ClientSideComponentId="9c5b1138-d784-49fc-a76b-406dfbb60f9c"
+        ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    </CustomAction>
+    <CustomAction
+        Title="Statistics"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ClientSideComponentId="dc52ff60-0181-48c1-bb03-efd0f9aeff7c"
+        ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    </CustomAction>
+</Elements>
