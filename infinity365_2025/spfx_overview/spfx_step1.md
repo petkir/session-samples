@@ -14,4 +14,3 @@ Ideas:
 https://pnp.github.io/sp-dev-fx-webparts/
 
 
-Idea
