@@ -1,0 +1,39 @@
+# Azure SDK packages
+azure-search-documents>=11.4.0
+azure-identity>=1.15.0
+azure-core>=1.29.0
+
+# HTTP client for direct API calls
+aiohttp>=3.9.0
+
+# PDF processing
+PyPDF2>=3.0.1
+pdfplumber>=0.9.0
+
+# Image processing (NEW)
+Pillow>=10.0.0
+pdf2image>=1.16.0
+pymupdf>=1.23.0
+
+# Text processing and chunking - Python 3.9 compatible versions
+langchain>=0.1.0,<0.2.0
+langchain-text-splitters>=0.0.1
+tiktoken>=0.5.0
+
+# Environment and configuration - Python 3.9 compatible versions
+python-dotenv>=1.0.0
+pydantic>=2.0.0,<2.1.0
+pydantic-settings>=2.0.0,<2.1.0
+
+# Logging and monitoring
+structlog>=23.0.0
+rich>=13.0.0
+
+# Async support
+asyncio-throttle>=1.0.0
+
+# Data handling - Python 3.9 compatible versions
+pandas>=1.5.0,<2.1.0
+numpy>=1.24.0,<1.25.0
+
+# Note: base64 is a built-in Python module, no need to install

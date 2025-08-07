@@ -398,3 +398,7 @@ FodyWeavers.xsd
 *.sln.iml
 .DS_Store
 app_insights_qfix/qfix/.env
+
+ai_search/python/**/.env
+ai_search/python/**/venv/** 
+ai_search.zip
