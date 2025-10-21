@@ -1,0 +1,97 @@
+name: Deploy Solution BasicWebPartCICD
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ESPC2025/1_22_0_Beta3/02Pipelines/02MultiStage/BasicWebPartMultiStage/**'
+  workflow_dispatch:
+
+env:
+  NodeVersion: 22.x
+  PackageName: basic-web-part-cicd.sppkg
+
+jobs:
+  build:
+    name: Build and Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Use Node.js ${{ env.NodeVersion }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NodeVersion }}
+      
+      - name: Run npm ci
+        run: npm ci
+      
+      - name: Bundle & Package
+        run: |
+          npm run package-solution-prod
+      
+      - name: Upload Package Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: spfx-package
+          path: sharepoint/solution/${{ env.PackageName }}
+          retention-days: 30
+
+  deploy-test:
+    name: Deploy to Test Environment
+    needs: build
+    runs-on: ubuntu-latest
+    environment: 
+      name: Test
+      url: ${{ vars.SHAREPOINT_URL }}
+    steps:
+      - name: Download Package Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: spfx-package
+          path: ./package
+      
+      - name: CLI for Microsoft 365 Login
+        uses: pnp/action-cli-login@v2.2.4
+        with:
+          CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
+          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+          APP_ID: ${{ secrets.APP_ID }}
+          TENANT: ${{ secrets.TENANT_ID }}
+      
+      - name: CLI for Microsoft 365 Deploy App to Test
+        uses: pnp/action-cli-deploy@v4.0.0
+        with:
+          APP_FILE_PATH: ./package/${{ env.PackageName }}
+          SKIP_FEATURE_DEPLOYMENT: true
+          OVERWRITE: true
+
+  deploy-production:
+    name: Deploy to Production Environment
+    needs: deploy-test
+    runs-on: ubuntu-latest
+    environment: 
+      name: Production
+      url: ${{ vars.SHAREPOINT_URL }}
+    steps:
+      - name: Download Package Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: spfx-package
+          path: ./package
+      
+      - name: CLI for Microsoft 365 Login
+        uses: pnp/action-cli-login@v2.2.4
+        with:
+          CERTIFICATE_ENCODED: ${{ secrets.CERTIFICATE_ENCODED }}
+          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+          APP_ID: ${{ secrets.APP_ID }}
+          TENANT: ${{ secrets.TENANT_ID }}
+      
+      - name: CLI for Microsoft 365 Deploy App to Production
+        uses: pnp/action-cli-deploy@v4.0.0
+        with:
+          APP_FILE_PATH: ./package/${{ env.PackageName }}
+          SKIP_FEATURE_DEPLOYMENT: true
+          OVERWRITE: true

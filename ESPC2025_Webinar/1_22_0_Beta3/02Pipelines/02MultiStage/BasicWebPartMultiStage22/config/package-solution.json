@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "basic-web-part-multi-stage-22-client-side-solution",
+    "id": "985c5851-e743-4ccf-aa71-592324653ea3",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.0-beta.3"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "basic-web-part-multi-stage-22 description"
+      },
+      "longDescription": {
+        "default": "basic-web-part-multi-stage-22 description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "basic-web-part-multi-stage-22 Feature",
+        "description": "The feature that activates elements of the basic-web-part-multi-stage-22 solution.",
+        "id": "fccfe0ca-5dbd-4724-b3bb-0d11c31529df",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/basic-web-part-multi-stage-22.sppkg"
+  }
+}

@@ -1,0 +1,118 @@
+name: Deploy Solution BasicWebPartCICD
+trigger:
+  branches:
+    include:
+      - main
+    paths:
+      include:
+        - 'ESPC2025/1_21_1/02Pipelines/02MultiStage/BasicWebPartMultiStage/**'
+pool:
+  vmImage: ubuntu-latest
+variables:
+  - name: PackageName
+    value: basic-web-part-cicd.sppkg
+  - name: NodeVersion
+    value: 22.x
+
+stages:
+  - stage: Build
+    displayName: Build and Package
+    jobs:
+      - job: Build
+        displayName: Build SPFx Solution
+        steps:
+          - task: NodeTool@0
+            displayName: Use Node.js $(NodeVersion)
+            inputs:
+              versionSpec: $(NodeVersion)
+          
+          - task: Npm@1
+            displayName: Run npm install
+            inputs:
+              command: install
+          
+          - task: Gulp@0
+            displayName: Gulp bundle
+            inputs:
+              gulpFile: ./gulpfile.js
+              targets: bundle
+              arguments: --ship
+          
+          - task: Gulp@0
+            displayName: Gulp package
+            inputs:
+              targets: package-solution
+              arguments: --ship
+          
+          - task: PublishPipelineArtifact@1
+            displayName: Publish Build Artifact
+            inputs:
+              targetPath: '$(Build.SourcesDirectory)/sharepoint/solution/$(PackageName)'
+              artifact: 'spfx-package'
+              publishLocation: 'pipeline'
+
+  - stage: Deploy_Test
+    displayName: Deploy to Test Environment
+    dependsOn: Build
+    variables:
+      - group: SPFx-Test-Environment
+    jobs:
+      - deployment: Deploy_Test
+        displayName: Deploy to Test
+        environment: 'Test'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: DownloadPipelineArtifact@2
+                  displayName: Download Build Artifact
+                  inputs:
+                    artifact: 'spfx-package'
+                    path: '$(Pipeline.Workspace)/spfx-package'
+                
+                - task: Npm@1
+                  displayName: Install CLI for Microsoft 365
+                  inputs:
+                    command: custom
+                    verbose: false
+                    customCommand: install -g @pnp/cli-microsoft365
+                
+                - script: |
+                    m365 login --authType certificate --certificateBase64Encoded '$(CertificateBase64Encoded)' --password '$(CertificatePassword)' --appId '$(EntraAppId)' --tenant '$(TenantId)' 
+                    m365 spo set --url '$(SharePointUrl)' 
+                    m365 spo app add --filePath '$(Pipeline.Workspace)/spfx-package/$(PackageName)' --overwrite 
+                    m365 spo app deploy --skipFeatureDeployment --name '$(PackageName)' --appCatalogScope 'tenant'
+                  displayName: Deploy to Test Environment
+
+  - stage: Deploy_Production
+    displayName: Deploy to Production Environment
+    dependsOn: Deploy_Test
+    variables:
+      - group: SPFx-Production-Environment
+    jobs:
+      - deployment: Deploy_Production
+        displayName: Deploy to Production
+        environment: 'Production'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: DownloadPipelineArtifact@2
+                  displayName: Download Build Artifact
+                  inputs:
+                    artifact: 'spfx-package'
+                    path: '$(Pipeline.Workspace)/spfx-package'
+                
+                - task: Npm@1
+                  displayName: Install CLI for Microsoft 365
+                  inputs:
+                    command: custom
+                    verbose: false
+                    customCommand: install -g @pnp/cli-microsoft365
+                
+                - script: |
+                    m365 login --authType certificate --certificateBase64Encoded '$(CertificateBase64Encoded)' --password '$(CertificatePassword)' --appId '$(EntraAppId)' --tenant '$(TenantId)' 
+                    m365 spo set --url '$(SharePointUrl)' 
+                    m365 spo app add --filePath '$(Pipeline.Workspace)/spfx-package/$(PackageName)' --overwrite 
+                    m365 spo app deploy --skipFeatureDeployment --name '$(PackageName)' --appCatalogScope 'tenant'
+                  displayName: Deploy to Production Environment

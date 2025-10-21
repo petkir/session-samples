@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "basic-web-part-client-side-solution",
+    "id": "9c6b72ca-5dd7-4e41-9020-22e25354c12d",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.21.1"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "BasicWebPart description"
+      },
+      "longDescription": {
+        "default": "BasicWebPart description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "basic-web-part Feature",
+        "description": "The feature that activates elements of the basic-web-part solution.",
+        "id": "8817a3c6-fb72-40a4-a94f-744339a567ac",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/basic-web-part.sppkg"
+  }
+}
