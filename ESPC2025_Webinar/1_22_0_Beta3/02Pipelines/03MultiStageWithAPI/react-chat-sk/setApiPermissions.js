@@ -8,35 +8,30 @@ ENV: ENTRA_ResourceReplyUrl=webApiPermissionRequests.replyUrl default: "http://l
 */    
 
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+const fs = require('fs');
+const path = require('path');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-
-export const setApiPermissions = (env) => {
+const setApiPermissions = (env) => {
   const packageSolutionPath = path.join(__dirname, './config/package-solution.json');
-    console.log(`Setting API Permissions in ${packageSolutionPath}`);
+  console.log(`Setting API Permissions in ${packageSolutionPath}`);
   
   if (fs.existsSync(packageSolutionPath)) {
     const data = fs.readFileSync(packageSolutionPath, 'utf8');
     let packageSolution = JSON.parse(data);
 
     if(env.ENTRA_ResourceName && env.ENTRA_ResourceAppId ){ 
-    const apiPermissions =[];
-    const apiPermission = {};
+      const apiPermissions =[];
+      const apiPermission = {};
 
-    apiPermission.resourceName = env.ENTRA_ResourceName ;
-    apiPermission.resourceAppId = env.ENTRA_ResourceAppId ;
-    apiPermission.resourceScope = env.ENTRA_ResourceScope || "user_impersonation";
-    apiPermission.resourceReplyUrl = env.ENTRA_ResourceReplyUrl ;
-    
-    apiPermissions.push(apiPermission);
-    packageSolution.webApiPermissionRequests = apiPermissions;
-    fs.writeFileSync(packageSolutionPath, JSON.stringify(packageSolution, null, 2), 'utf8');
-    console.log(`API Permissions set successfully in ${packageSolutionPath}`);
+      apiPermission.resource = env.ENTRA_ResourceName ;
+      apiPermission.appId = env.ENTRA_ResourceAppId ;
+      apiPermission.scope = env.ENTRA_ResourceScope || "user_impersonation";
+      apiPermission.replyUrl = env.ENTRA_ResourceReplyUrl ;
+      
+      apiPermissions.push(apiPermission);
+      packageSolution.solution.webApiPermissionRequests = apiPermissions;
+      fs.writeFileSync(packageSolutionPath, JSON.stringify(packageSolution, null, 2), 'utf8');
+      console.log(`API Permissions set successfully in ${packageSolutionPath}`);
     }
     else {
       console.log(`Environment variables ENTRA_ResourceName and ENTRA_ResourceAppId are required to set API permissions.`);
@@ -46,5 +41,10 @@ export const setApiPermissions = (env) => {
   }
 };
 
-setApiPermissions(process.env);
+module.exports = { setApiPermissions };
+
+// Run if called directly
+if (require.main === module) {
+  setApiPermissions(process.env);
+}
 

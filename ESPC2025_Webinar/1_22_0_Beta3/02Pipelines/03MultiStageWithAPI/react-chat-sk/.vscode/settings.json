@@ -10,5 +10,10 @@
     "**/lib-amd": true,
     "src/**/*.scss.ts": true
   },
-  "typescript.tsdk": ".\\node_modules\\typescript\\lib"
+  "typescript.tsdk": ".\\node_modules\\typescript\\lib",
+  "azureFunctions.deploySubpath": "azure-function-sk/bin/Release/net10.0/publish",
+  "azureFunctions.projectLanguage": "C#",
+  "azureFunctions.projectRuntime": "~4",
+  "debug.internalConsoleOptions": "neverOpen",
+  "azureFunctions.preDeployTask": "publish (functions)"
 }

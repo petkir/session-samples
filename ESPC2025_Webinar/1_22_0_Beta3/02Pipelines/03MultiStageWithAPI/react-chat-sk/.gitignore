@@ -32,3 +32,6 @@ obj
 
 # Styles Generated Code
 *.scss.ts
+
+__azurite_db_*.json
+__blobstorage__*

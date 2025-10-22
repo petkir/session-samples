@@ -3,16 +3,18 @@ trigger:
   branches:
     include:
       - main
-    paths:
-      include:
-        - 'ESPC2025/1_22_0_Beta3/02Pipelines/02MultiStage/BasicWebPartMultiStage/**'
+  paths:
+    include:
+      - '1_22_0_Beta3/02Pipelines/02MultiStage/BasicWebPartMultiStage22'
 pool:
   vmImage: ubuntu-latest
 variables:
   - name: PackageName
-    value: basic-web-part-cicd.sppkg
+    value: basic-web-part-multi-stage-22.sppkg
   - name: NodeVersion
     value: 22.x
+  - name: WorkingDir
+    value: '1_22_0_Beta3/02Pipelines/02MultiStage/BasicWebPartMultiStage22'
 
 stages:
   - stage: Build
@@ -30,15 +32,18 @@ stages:
             displayName: Run npm install
             inputs:
               command: install
+              workingDir: '$(WorkingDir)'
           - task: Npm@1
-            displayName: Run npm run package-solution-prod
+            displayName: Run npm package-solution-prod
             inputs:
               command: custom
               customCommand: run package-solution-prod
+              workingDir: '$(WorkingDir)'
+          
           - task: PublishPipelineArtifact@1
             displayName: Publish Build Artifact
             inputs:
-              targetPath: '$(Build.SourcesDirectory)/sharepoint/solution/$(PackageName)'
+              targetPath: '$(Build.SourcesDirectory)/$(WorkingDir)/sharepoint/solution/$(PackageName)'
               artifact: 'spfx-package'
               publishLocation: 'pipeline'
 
@@ -46,7 +51,7 @@ stages:
     displayName: Deploy to Test Environment
     dependsOn: Build
     variables:
-      - group: SPFx-Test-Environment
+      - group: Test
     jobs:
       - deployment: Deploy_Test
         displayName: Deploy to Test
@@ -55,6 +60,11 @@ stages:
           runOnce:
             deploy:
               steps:
+                - task: DownloadSecureFile@1
+                  displayName: Download PFX Certificate
+                  name: certificateFile
+                  inputs:
+                    secureFile: Test.pfx
                 - task: DownloadPipelineArtifact@2
                   displayName: Download Build Artifact
                   inputs:
@@ -69,8 +79,8 @@ stages:
                     customCommand: install -g @pnp/cli-microsoft365
                 
                 - script: |
-                    m365 login --authType certificate --certificateBase64Encoded '$(CertificateBase64Encoded)' --password '$(CertificatePassword)' --appId '$(EntraAppId)' --tenant '$(TenantId)' 
-                    m365 spo set --url '$(SharePointUrl)' 
+                    m365 login --authType certificate --certificateFile '$(certificateFile.secureFilePath)' --password '$(CertificatePassword)' --appId '$(CDPipeline_EntraID)' --tenant '$(CDPipeline_TenantID)' 
+                    m365 spo set --url '$(SharePointBaseUrl)' 
                     m365 spo app add --filePath '$(Pipeline.Workspace)/spfx-package/$(PackageName)' --overwrite 
                     m365 spo app deploy --skipFeatureDeployment --name '$(PackageName)' --appCatalogScope 'tenant'
                   displayName: Deploy to Test Environment
@@ -79,15 +89,20 @@ stages:
     displayName: Deploy to Production Environment
     dependsOn: Deploy_Test
     variables:
-      - group: SPFx-Production-Environment
+      - group: Prod
     jobs:
       - deployment: Deploy_Production
         displayName: Deploy to Production
-        environment: 'Production'
+        environment: 'Prod'
         strategy:
           runOnce:
             deploy:
               steps:
+                - task: DownloadSecureFile@1
+                  displayName: Download PFX Certificate
+                  name: certificateFile
+                  inputs:
+                    secureFile: Prod.pfx              
                 - task: DownloadPipelineArtifact@2
                   displayName: Download Build Artifact
                   inputs:
@@ -102,8 +117,8 @@ stages:
                     customCommand: install -g @pnp/cli-microsoft365
                 
                 - script: |
-                    m365 login --authType certificate --certificateBase64Encoded '$(CertificateBase64Encoded)' --password '$(CertificatePassword)' --appId '$(EntraAppId)' --tenant '$(TenantId)' 
-                    m365 spo set --url '$(SharePointUrl)' 
+                    m365 login --authType certificate --certificateFile '$(certificateFile.secureFilePath)' --password '$(CertificatePassword)' --appId '$(CDPipeline_EntraID)' --tenant '$(CDPipeline_TenantID)' 
+                    m365 spo set --url '$(SharePointBaseUrl)' 
                     m365 spo app add --filePath '$(Pipeline.Workspace)/spfx-package/$(PackageName)' --overwrite 
                     m365 spo app deploy --skipFeatureDeployment --name '$(PackageName)' --appCatalogScope 'tenant'
                   displayName: Deploy to Production Environment

@@ -44,8 +44,6 @@
   },
   "paths": {
     "zippedPackage": "solution/react-chat-sk.sppkg"
-  },
-  "webApiPermissionRequests": [
-    {}
-  ]
+  }
+
 }

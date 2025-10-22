@@ -23,8 +23,6 @@ Key features include:
 
 [Video](./assets/ReactChatSk.mp4)
 
-
-
 ## Compatibility
 
 | :warning: Important          |

@@ -46,6 +46,11 @@
     "zippedPackage": "solution/react-chat-sk.sppkg"
   },
   "webApiPermissionRequests": [
-    {}
+    {
+      "resource": "React-Chat-Sk",
+      "scope": "user_impersonation",
+      "appId": "c032171c-4d2c-4b30-9572-f649390a4c8c",
+      "replyUrl": "http://localhost:7071"
+      }
   ]
 }

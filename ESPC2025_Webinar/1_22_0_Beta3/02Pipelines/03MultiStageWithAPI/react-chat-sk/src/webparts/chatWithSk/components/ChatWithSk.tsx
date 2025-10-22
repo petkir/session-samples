@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './ChatWithSk.module.scss';
 import type { IChatWithSkProps } from './IChatWithSkProps';
 
-import { AZURE_FUNCTION_APP_ID } from '../../../globalConfig';
+import { AZURE_FUNCTION_APP_ID, AZURE_FUNCTION_URL } from '../../../globalConfig';
 import { AadTokenProvider } from '@microsoft/sp-http';
 import { ChatInterface } from '../../../components/ChatInterface';
 
@@ -41,9 +41,9 @@ export default class ChatWithSk extends React.Component<IChatWithSkProps, IChatW
             <div>Please configure the Azure Function URL in the web part properties.</div>
           )}
         </div>
-        {(azFunctionUrl && azFunctionUrl.length > 0 && tokenProvider) && (
+        {(AZURE_FUNCTION_URL && AZURE_FUNCTION_URL.length > 0 && tokenProvider) && (
           <ChatInterface 
-            azFunctionUrl={azFunctionUrl}
+            azFunctionUrl={AZURE_FUNCTION_URL}
             azureFunctionAppId={AZURE_FUNCTION_APP_ID}
             tokenProvider={tokenProvider}
           />

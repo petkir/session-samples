@@ -3,7 +3,7 @@ import { TextField, PrimaryButton, Spinner, SpinnerSize, IconButton } from '@flu
 import { Icon } from '@fluentui/react/lib/Icon';
 import { AadTokenProvider } from '@microsoft/sp-http';
 import { marked } from 'marked';
-import * as DOMPurify from 'dompurify';
+//import * as DOMPurify from 'dompurify';
 import styles from './ChatInterface.module.scss';
 
 interface IChatMessage {
@@ -213,7 +213,7 @@ export const ChatInterface: React.FC<IChatInterfaceProps> = (props) => {
   const renderMarkdown = (content: string): string => {
     const rawHtml = marked.parse(content) as string;
     return rawHtml;
-    return DOMPurify.sanitize(rawHtml);
+    //return DOMPurify.sanitize(rawHtml);
   };
 
   const renderMessage = (message: IChatMessage, index: number): JSX.Element => {
