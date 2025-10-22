@@ -1,0 +1,19 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "useGulp": false,
+    "plusBeta": true,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.0-beta.3",
+    "libraryName": "basic-web-part-multi-stage-22",
+    "libraryId": "985c5851-e743-4ccf-aa71-592324653ea3",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "basic-web-part-multi-stage-22",
+    "solutionShortDescription": "basic-web-part-multi-stage-22 description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

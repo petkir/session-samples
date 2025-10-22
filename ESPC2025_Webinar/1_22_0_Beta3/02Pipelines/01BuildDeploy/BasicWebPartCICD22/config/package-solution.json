@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "basic-web-part-cicd-22-client-side-solution",
+    "id": "c8a5ef1a-f91d-4dd8-9a98-26aa6cd43a1b",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.0-beta.3"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "basic-web-part-cicd-22 description"
+      },
+      "longDescription": {
+        "default": "basic-web-part-cicd-22 description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "basic-web-part-cicd-22 Feature",
+        "description": "The feature that activates elements of the basic-web-part-cicd-22 solution.",
+        "id": "cd1cf935-b4ef-473b-a667-199b764e2c9a",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/basic-web-part-cicd-22.sppkg"
+  }
+}

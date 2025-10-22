@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "basic-web-part-multi-stage-22-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/basicWebPartMultiStage22/BasicWebPartMultiStage22WebPart.js",
+          "manifest": "./src/webparts/basicWebPartMultiStage22/BasicWebPartMultiStage22WebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "BasicWebPartMultiStage22WebPartStrings": "lib/webparts/basicWebPartMultiStage22/loc/{locale}.js"
+  }
+}

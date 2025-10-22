@@ -1,0 +1,19 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "useGulp": false,
+    "plusBeta": true,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.0-beta.3",
+    "libraryName": "basic-web-part-22",
+    "libraryId": "13c836a2-845e-4ed3-934f-748dcab96c74",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "BasicWebPart22",
+    "solutionShortDescription": "BasicWebPart22 description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

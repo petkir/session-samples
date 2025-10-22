@@ -1,0 +1,128 @@
+name: Deploy SPFx Solution (BasicWebPartMultiStage22)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '1_22_0_Beta3/02Pipelines/02MultiStage/BasicWebPartMultiStage22/**'
+  workflow_dispatch:
+
+env:
+  PACKAGE_NAME: basic-web-part-multi-stage-22.sppkg
+  WORKING_DIR: 1_22_0_Beta3/02Pipelines/02MultiStage/BasicWebPartMultiStage22
+  NODE_VERSION: 22
+
+jobs:
+  build:
+    name: Build and Package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIR }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: ${{ env.WORKING_DIR }}/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Package SPFx solution
+        run: npm run package-solution-prod
+
+      - name: Upload SPFx package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: spfx-package
+          path: ${{ env.WORKING_DIR }}/sharepoint/solution/${{ env.PACKAGE_NAME }}
+          if-no-files-found: error
+
+  deploy_test:
+    name: Deploy to Test
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: Test
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: spfx-package
+          path: spfx-package
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install CLI for Microsoft 365
+        run: npm install -g @pnp/cli-microsoft365
+
+      - name: Write certificate to disk
+        shell: bash
+        env:
+          PFX_BASE64: ${{ secrets.PFX_BASE64 }}
+        run: |
+          echo -n "$PFX_BASE64" | base64 --decode > cert.pfx
+
+      - name: Deploy SPFx package to Test
+        shell: bash
+        env:
+          CERT_PASSWORD: ${{ secrets.CERT_PASSWORD }}
+          ENTRA_APP_ID: ${{ secrets.ENTRA_APP_ID }}
+          TENANT_ID: ${{ secrets.TENANT_ID }}
+          SHAREPOINT_BASE_URL: ${{ secrets.SHAREPOINT_BASE_URL }}
+        run: |
+          m365 login --authType certificate --certificateFile ./cert.pfx --password "$CERT_PASSWORD" --appId "$ENTRA_APP_ID" --tenant "$TENANT_ID"
+          m365 spo set --url "$SHAREPOINT_BASE_URL"
+          m365 spo app add --filePath "$(pwd)/spfx-package/${{ env.PACKAGE_NAME }}" --overwrite
+          m365 spo app deploy --skipFeatureDeployment --name "${{ env.PACKAGE_NAME }}" --appCatalogScope 'tenant'
+
+  deploy_prod:
+    name: Deploy to Production
+    needs: deploy_test
+    runs-on: ubuntu-latest
+    environment:
+      name: Prod
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: spfx-package
+          path: spfx-package
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install CLI for Microsoft 365
+        run: npm install -g @pnp/cli-microsoft365
+
+      - name: Write certificate to disk
+        shell: bash
+        env:
+          PFX_BASE64: ${{ secrets.PFX_BASE64 }}
+        run: |
+          echo -n "$PFX_BASE64" | base64 --decode > cert.pfx
+
+      - name: Deploy SPFx package to Production
+        shell: bash
+        env:
+          CERT_PASSWORD: ${{ secrets.CERT_PASSWORD }}
+          ENTRA_APP_ID: ${{ secrets.ENTRA_APP_ID }}
+          TENANT_ID: ${{ secrets.TENANT_ID }}
+          SHAREPOINT_BASE_URL: ${{ secrets.SHAREPOINT_BASE_URL }}
+        run: |
+          m365 login --authType certificate --certificateFile ./cert.pfx --password "$CERT_PASSWORD" --appId "$ENTRA_APP_ID" --tenant "$TENANT_ID"
+          m365 spo set --url "$SHAREPOINT_BASE_URL"
+          m365 spo app add --filePath "$(pwd)/spfx-package/${{ env.PACKAGE_NAME }}" --overwrite
+          m365 spo app deploy --skipFeatureDeployment --name "${{ env.PACKAGE_NAME }}" --appCatalogScope 'tenant'

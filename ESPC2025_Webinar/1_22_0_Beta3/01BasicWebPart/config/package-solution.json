@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "basic-web-part-22-client-side-solution",
+    "id": "13c836a2-845e-4ed3-934f-748dcab96c74",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.0-beta.3"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "BasicWebPart22 description"
+      },
+      "longDescription": {
+        "default": "BasicWebPart22 description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "basic-web-part-22 Feature",
+        "description": "The feature that activates elements of the basic-web-part-22 solution.",
+        "id": "021110cb-a92c-4870-9f40-57aece470ef8",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/basic-web-part-22.sppkg"
+  }
+}

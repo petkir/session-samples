@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "BasicWebPartCICD",
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "BasicWebPartCICD",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.21.1",
+    "libraryName": "basic-web-part-cicd",
+    "libraryId": "9ecd0f7a-cec3-4519-be55-ce47f7b4c480",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionShortDescription": "BasicWebPartCICD description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "useGulp": false,
+    "plusBeta": true,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.0-beta.3",
+    "libraryName": "basic-web-part-cicd-22",
+    "libraryId": "c8a5ef1a-f91d-4dd8-9a98-26aa6cd43a1b",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "basic-web-part-cicd-22",
+    "solutionShortDescription": "basic-web-part-cicd-22 description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

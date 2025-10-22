@@ -1,0 +1,176 @@
+name: Deploy Solution BasicWebPartCICD
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - '1_22_0_Beta3/02Pipelines/03MultiStageWithAPI/react-chat-sk'
+pool:
+  vmImage: ubuntu-latest
+variables:
+  - name: PackageName
+    value: react-chat-sk.sppkg
+  - name: NodeVersion
+    value: 22.x
+  - name: WorkingDir
+    value: '1_22_0_Beta3/02Pipelines/03MultiStageWithAPI/react-chat-sk'
+
+stages:
+  - stage: Build
+    displayName: Build and Package
+    jobs:
+      - job: Build
+        displayName: Artifact Src Package
+        steps:
+
+          - task: PublishPipelineArtifact@1
+            displayName: Publish Build Artifact
+            inputs:
+              targetPath: '$(Build.SourcesDirectory)/$(WorkingDir)'
+              artifact: 'spfx-src-package'
+              publishLocation: 'pipeline'
+
+  - stage: Deploy_Test
+    displayName: Deploy to Test Environment
+    dependsOn: Build
+    variables:
+      - group: Test
+    jobs:
+      - deployment: Deploy_Test
+        displayName: Deploy to Test
+        environment: 'Test'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: DownloadSecureFile@1
+                  displayName: Download PFX Certificate
+                  name: certificateFile
+                  inputs:
+                    secureFile: Test.pfx
+                - task: DownloadPipelineArtifact@2
+                  displayName: Download Build Artifact
+                  inputs:
+                    artifact: 'spfx-src-package'
+                    path: '$(Pipeline.Workspace)/spfx-src-package'
+
+                - task: NodeTool@0
+                  displayName: Use Node.js $(NodeVersion)
+                  inputs:
+                    versionSpec: $(NodeVersion)
+                    
+                - task: Npm@1
+                  displayName: Run npm install
+                  inputs:
+                    command: install
+                    workingDir: '$(Pipeline.Workspace)/spfx-src-package'
+                - task: Npm@1
+                  displayName: Run npm package-solution-prod
+                  inputs:
+                    command: custom
+                    customCommand: run package-solution-prod
+                    workingDir: '$(Pipeline.Workspace)/spfx-src-package'
+                  env:
+                    ENTRA_ResourceName: $(ENTRA_ResourceName)
+                    ENTRA_ResourceAppId: $(ENTRA_ResourceAppId)
+                    ENTRA_ResourceScope: $(ENTRA_ResourceScope)
+                    ENTRA_ResourceReplyUrl: $(ENTRA_ResourceReplyUrl)  
+                
+                - task: Npm@1
+                  displayName: Install CLI for Microsoft 365
+                  inputs:
+                    command: custom
+                    verbose: false
+                    customCommand: install -g @pnp/cli-microsoft365
+               
+                - script: |
+                    m365 login --authType certificate --certificateFile '$(certificateFile.secureFilePath)' --password '$(CertificatePassword)' --appId '$(CDPipeline_EntraID)' --tenant '$(CDPipeline_TenantID)' 
+                    m365 spo set --url '$(SharePointBaseUrl)' 
+                    m365 spo app add --filePath '$(Pipeline.Workspace)/spfx-src-package//sharepoint/solution/$(PackageName)' --overwrite 
+                    m365 spo app deploy --skipFeatureDeployment --name '$(PackageName)' --appCatalogScope 'tenant'
+                  displayName: Deploy to Test Environment
+                - task: PublishPipelineArtifact@1
+                  displayName: Publish Build Artifact
+                  inputs:
+                    targetPath: '$(Pipeline.Workspace)/spfx-src-package/sharepoint/solution/$(PackageName)'
+                    artifact: 'package-test'
+                    publishLocation: 'pipeline'
+                - task: PublishPipelineArtifact@1
+                  displayName: Publish Build Artifact
+                  inputs:
+                    targetPath: '$(Pipeline.Workspace)/spfx-src-package/src/globalConfig.ts'
+                    artifact: 'package-config-test'
+                    publishLocation: 'pipeline'                    
+  - stage: Deploy_Production
+    displayName: Deploy to Production Environment
+    dependsOn: Deploy_Test
+    variables:
+      - group: Prod
+    jobs:
+      - deployment: Deploy_Production
+        displayName: Deploy to Production
+        environment: 'Prod'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: DownloadSecureFile@1
+                  displayName: Download PFX Certificate
+                  name: certificateFile
+                  inputs:
+                    secureFile: Prod.pfx
+                - task: DownloadPipelineArtifact@2
+                  displayName: Download Build Artifact
+                  inputs:
+                    artifact: 'spfx-src-package'
+                    path: '$(Pipeline.Workspace)/spfx-src-package'
+
+                - task: NodeTool@0
+                  displayName: Use Node.js $(NodeVersion)
+                  inputs:
+                    versionSpec: $(NodeVersion)
+                    
+                - task: Npm@1
+                  displayName: Run npm install
+                  inputs:
+                    command: install
+                    workingDir: '$(Pipeline.Workspace)/spfx-src-package'
+                - task: Npm@1
+                  displayName: Run npm package-solution-prod
+                  inputs:
+                    command: custom
+                    customCommand: run package-solution-prod
+                    workingDir: '$(Pipeline.Workspace)/spfx-src-package'
+                  env:
+                    ENTRA_ResourceName: $(ENTRA_ResourceName)
+                    ENTRA_ResourceAppId: $(ENTRA_ResourceAppId)
+                    ENTRA_ResourceScope: $(ENTRA_ResourceScope)
+                    ENTRA_ResourceReplyUrl: $(ENTRA_ResourceReplyUrl)  
+                
+                - task: Npm@1
+                  displayName: Install CLI for Microsoft 365
+                  inputs:
+                    command: custom
+                    verbose: false
+                    customCommand: install -g @pnp/cli-microsoft365
+                
+                - script: |
+                    m365 login --authType certificate --certificateFile '$(certificateFile.secureFilePath)' --password '$(CertificatePassword)' --appId '$(CDPipeline_EntraID)' --tenant '$(CDPipeline_TenantID)' 
+                    m365 spo set --url '$(SharePointBaseUrl)' 
+                    m365 spo app add --filePath '$(Pipeline.Workspace)/spfx-src-package//sharepoint/solution/$(PackageName)' --overwrite 
+                    m365 spo app deploy --skipFeatureDeployment --name '$(PackageName)' --appCatalogScope 'tenant'
+                  displayName: Deploy to Production Environment
+                - task: PublishPipelineArtifact@1
+                  displayName: Publish Build Artifact
+                  inputs:
+                    targetPath: '$(Pipeline.Workspace)/spfx-src-package/sharepoint/solution/$(PackageName)'
+                    artifact: 'package-prod'
+                    publishLocation: 'pipeline'
+                - task: PublishPipelineArtifact@1
+                  displayName: Publish Build Artifact
+                  inputs:
+                    targetPath: '$(Pipeline.Workspace)/spfx-src-package/src/globalConfig.ts'
+                    artifact: 'package-config'
+                    publishLocation: 'pipeline'
+               
