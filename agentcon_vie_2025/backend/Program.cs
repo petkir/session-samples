@@ -3,14 +3,14 @@ using Azure.Identity;
 using System.Net.WebSockets;
 using Backend.Services;
 using Backend.Tools;
+using Microsoft.AspNetCore.Routing.Tree;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Load environment variables from .env file in development
 if (!builder.Environment.IsProduction())
 {
-    var root = Directory.GetCurrentDirectory();
-    var envPath = Path.Combine(root, ".env");
+   var envPath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
     if (File.Exists(envPath))
     {
         foreach (var line in File.ReadAllLines(envPath))
@@ -21,11 +21,19 @@ if (!builder.Environment.IsProduction())
             var parts = line.Split('=', 2, StringSplitOptions.TrimEntries);
             if (parts.Length == 2)
             {
+                Console.WriteLine($"Setting env var {parts[0]}");
                 Environment.SetEnvironmentVariable(parts[0], parts[1]);
             }
         }
+    } else
+    {
+        Console.WriteLine(".env file not found, skipping loading environment variables from file.");
     }
+}else
+{
+    Console.WriteLine("Production environment detected, skipping loading environment variables from .env file.");
 }
+
 
 // Configure services
 builder.Services.AddCors(options =>

@@ -54,52 +54,103 @@ public class RTMiddleTier
     {
         _logger.LogInformation("Client WebSocket connected");
 
-        using var serverWebSocket = new ClientWebSocket();
-
-        // Build the WebSocket URI
-        var uriBuilder = new UriBuilder(_endpoint)
-        {
-            Path = $"/openai/realtime",
-            Query = $"api-version={_apiVersion}&deployment={_deployment}"
-        };
-
-        // Set authorization header
-        if (!string.IsNullOrEmpty(_apiKey))
-        {
-            serverWebSocket.Options.SetRequestHeader("api-key", _apiKey);
-        }
-        else if (_tokenCredential != null)
-        {
-            var token = await _tokenCredential.GetTokenAsync(
-                new TokenRequestContext(new[] { "https://cognitiveservices.azure.com/.default" }),
-                CancellationToken.None);
-            serverWebSocket.Options.SetRequestHeader("Authorization", $"Bearer {token.Token}");
-        }
-
-        await serverWebSocket.ConnectAsync(uriBuilder.Uri, CancellationToken.None);
-        _logger.LogInformation("Connected to Azure OpenAI Realtime API");
-
-        // Send initial session configuration
-        await SendSessionUpdateAsync(serverWebSocket);
-
-        // Start bidirectional message forwarding
-        var clientToServer = ForwardMessagesAsync(clientWebSocket, serverWebSocket, ProcessMessageToServer);
-        var serverToClient = ForwardMessagesAsync(serverWebSocket, clientWebSocket, ProcessMessageToClient);
-
+        ClientWebSocket? serverWebSocket = null;
+        
         try
         {
-            await Task.WhenAny(clientToServer, serverToClient);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error during WebSocket communication");
+            // Build the WebSocket URI
+            var uriBuilder = new UriBuilder(_endpoint)
+            {
+                Path = $"/openai/realtime",
+                Query = $"api-version={_apiVersion}&deployment={_deployment}"
+            };
+
+            // Retry logic for rate limiting (429 errors)
+            int maxRetries = 3;
+            int retryDelayMs = 1000;
+            
+            for (int attempt = 1; attempt <= maxRetries; attempt++)
+            {
+                serverWebSocket?.Dispose();
+                serverWebSocket = new ClientWebSocket();
+                
+                // Set authorization header
+                if (!string.IsNullOrEmpty(_apiKey))
+                {
+                    serverWebSocket.Options.SetRequestHeader("api-key", _apiKey);
+                }
+                else if (_tokenCredential != null)
+                {
+                    var token = await _tokenCredential.GetTokenAsync(
+                        new TokenRequestContext(new[] { "https://cognitiveservices.azure.com/.default" }),
+                        CancellationToken.None);
+                    serverWebSocket.Options.SetRequestHeader("Authorization", $"Bearer {token.Token}");
+                }
+                
+                try
+                {
+                    await serverWebSocket.ConnectAsync(uriBuilder.Uri, CancellationToken.None);
+                    _logger.LogInformation("Connected to Azure OpenAI Realtime API");
+                    break;
+                }
+                catch (WebSocketException ex) when (ex.Message.Contains("429") && attempt < maxRetries)
+                {
+                    _logger.LogWarning($"Rate limited (429). Retry {attempt}/{maxRetries} after {retryDelayMs}ms...");
+                    await Task.Delay(retryDelayMs);
+                    retryDelayMs *= 2; // Exponential backoff
+                }
+            }
+
+            // Send initial session configuration
+            try
+            {
+                _logger.LogInformation("Sending session update to Azure OpenAI...");
+                await SendSessionUpdateAsync(serverWebSocket);
+                _logger.LogInformation("Session update sent successfully");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to send session update");
+                throw;
+            }
+
+            // Start bidirectional message forwarding
+            _logger.LogInformation("Starting message forwarding...");
+            var clientToServer = ForwardMessagesAsync(clientWebSocket, serverWebSocket, ProcessMessageToServer);
+            var serverToClient = ForwardMessagesAsync(serverWebSocket, clientWebSocket, ProcessMessageToClient);
+
+            try
+            {
+                var completedTask = await Task.WhenAny(clientToServer, serverToClient);
+                _logger.LogInformation($"WebSocket task completed: {(completedTask == clientToServer ? "client->server" : "server->client")}");
+                
+                // Check for exceptions
+                if (completedTask.IsFaulted)
+                {
+                    _logger.LogError(completedTask.Exception, "WebSocket task faulted");
+                }
+                else if (completedTask.IsCanceled)
+                {
+                    _logger.LogWarning("WebSocket task was canceled");
+                }
+                else
+                {
+                    _logger.LogInformation("WebSocket task completed normally");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during WebSocket communication");
+            }
         }
         finally
         {
-            if (serverWebSocket.State == WebSocketState.Open)
+            _logger.LogInformation($"Cleanup: Client state={clientWebSocket.State}, Server state={serverWebSocket?.State}");
+            if (serverWebSocket?.State == WebSocketState.Open)
             {
                 await serverWebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", CancellationToken.None);
             }
+            serverWebSocket?.Dispose();
             _logger.LogInformation("WebSocket connection closed");
         }
     }
