@@ -1,0 +1,8 @@
+bin/
+obj/
+.env
+*.user
+*.suo
+*.vs/
+.vscode/
+wwwroot/
