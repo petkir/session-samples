@@ -1,0 +1,128 @@
+{
+  "$schema": "https://demotime.show/demo-time.schema.json",
+  "title": "04_backend",
+  "description": "",
+  "version": 2,
+  "demos": [
+    {
+      "id": "demo-mkxrnht6-pncp",
+      "title": "RTMiddleTier",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "backend/Program.cs",
+          "position": "82:88",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mkxroei9-sw4j",
+      "title": "SystemPrompt",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "backend/Program.cs",
+          "position": "91:99",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mkxrq9sp-zpdp",
+      "title": "Custom Tools",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "backend/Tools/CustomTools.cs",
+          "position": "27:27",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mkxrrs3d-v9eg",
+      "title": "Custom Tools Schema",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "backend/Tools/CustomTools.cs",
+          "position": "64:79",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mkxrt7yj-76e4",
+      "title": "Custom Tools Target",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "backend/Tools/CustomTools.cs",
+          "position": "109:115",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mkxryrhc-y8t9",
+      "title": "Call LLM System Instruction",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "backend/Services/RTMiddleTier.cs",
+          "position": "172:172",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mkxs04fe-tixi",
+      "title": "Add Tools to LLM",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "backend/Services/RTMiddleTier.cs",
+          "position": "182:191",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mkxrq5h4-d7eo",
+      "title": "RAG",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "backend/Program.cs",
+          "position": "91:99",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mkxrx0qg-qi1p",
+      "title": "RAG as Tool",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "backend/Tools/RagTools.cs",
+          "position": "64:77",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mkxs15hm-6j3b",
+      "title": "Voice Output",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "backend/Tools/RagTools.cs",
+          "position": "206:206",
+          "highlightWholeLine": true
+        }
+      ]
+    }
+  ]
+}

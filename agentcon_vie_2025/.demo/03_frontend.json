@@ -1,0 +1,62 @@
+{
+  "$schema": "https://demotime.show/demo-time.schema.json",
+  "title": "Frontend",
+  "description": "",
+  "version": 2,
+  "demos": [
+    {
+      "id": "demo-mkxr7zl9-4auw",
+      "title": "Websocket Connection",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "frontend/src/App.tsx",
+          "position": "20:20",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mkxr95qa-ad9s",
+      "title": "start recording",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "frontend/src/App.tsx",
+          "position": "113:121",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mkxrb3al-wl44",
+      "title": "start recording AudioContext",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "frontend/src/hooks/useAudioRecorder.ts",
+          "position": "11:11",
+          "highlightWholeLine": true
+        },
+        {
+          "action": "highlight",
+          "path": "frontend/src/hooks/useAudioRecorder.ts",
+          "position": "14:14",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mkxrcpqy-x04y",
+      "title": "Play Audio",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "frontend/src/App.tsx",
+          "position": "71:75",
+          "highlightWholeLine": true
+        }
+      ]
+    }
+  ]
+}

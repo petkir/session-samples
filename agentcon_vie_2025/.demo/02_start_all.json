@@ -1,0 +1,32 @@
+{
+  "$schema": "https://demotime.show/demo-time.schema.json",
+  "title": "02_start_all",
+  "description": "",
+  "version": 2,
+  "demos": [
+    {
+      "id": "demo-mkxrgkf9-0dgo",
+      "title": "Start Backend Frontend",
+      "steps": [
+        {
+          "action": "openTerminal",
+          "terminalId": "backend"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "backend",
+          "command": "cd backend && dotnet run"
+        },
+        {
+          "action": "openTerminal",
+          "terminalId": "frontend"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "frontend",
+          "command": "cd frontend && npm run dev"
+        }
+      ]
+    }
+  ]
+}

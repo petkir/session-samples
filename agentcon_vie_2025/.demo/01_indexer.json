@@ -1,0 +1,175 @@
+{
+  "$schema": "https://demotime.show/demo-time.schema.json",
+  "title": "Indexer",
+  "description": "Simple intro with a slide and code highlight.",
+  "version": 2,
+  "demos": [
+    {
+      "title": "Show the slide",
+      "description": "Show a slide and highlight a function in code.",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": ".demo/slides/intro-start.md"
+        }
+      ]
+    },
+    {
+      "title": "Indexer Path",
+      "description": "Highlight the `helloWorld` function in the code.",
+      "steps": [
+        {
+          "action": "open",
+          "path": "indexer/Program.cs"
+        },
+        {
+          "action": "highlight",
+          "path": "indexer/Program.cs",
+          "position": "93:93",
+          "highlightWholeLine": true,
+          "zoom": 0
+        }
+      ]
+    },
+    {
+      "title": "Indexer Loop",
+      "description": "Highlight the `helloWorld` function in the code.",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "indexer/Program.cs",
+          "position": "99:93",
+          "highlightWholeLine": true,
+          "zoom": 0
+        }
+      ],
+      "id": "demo-mkxqj4kt-of46"
+    },
+    {
+      "title": "Extract",
+      "description": "Highlight the `helloWorld` function in the code.",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "indexer/Program.cs",
+          "position": "107:107",
+          "highlightWholeLine": true,
+          "zoom": 0
+        }
+      ],
+      "id": "demo-mkxqkelh-bcvc"
+    },
+    {
+      "title": "PDF To Text",
+      "description": "Highlight the `helloWorld` function in the code.",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "indexer/Services/PdfReader.cs",
+          "position": "15:29",
+          "highlightWholeLine": true,
+          "zoom": 0
+        }
+      ],
+      "id": "demo-mkxqvm4v-o53g"
+    },
+    {
+      "title": "chunks",
+      "description": "Highlight the `helloWorld` function in the code.",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "indexer/Program.cs",
+          "position": "115:115",
+          "highlightWholeLine": true,
+          "zoom": 0
+        }
+      ],
+      "id": "demo-mkxql86b-k3if"
+    },
+    {
+      "title": "Paragraph Chunck",
+      "description": "Highlight the `helloWorld` function in the code.",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "indexer/Services/DocumentProcessor.cs",
+          "position": "29:33",
+          "highlightWholeLine": true,
+          "zoom": 0
+        }
+      ],
+      "id": "demo-mkxqxebb-fw0t"
+    },
+    {
+      "title": "Loop over chuncks",
+      "description": "Highlight the `helloWorld` function in the code.",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "indexer/Program.cs",
+          "position": "120:138",
+          "highlightWholeLine": true,
+          "zoom": 0
+        }
+      ],
+      "id": "demo-mkxqmlc9-q0m7"
+    },
+    {
+      "title": "Embedding",
+      "description": "Highlight the `helloWorld` function in the code.",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "indexer/Program.cs",
+          "position": "123:123",
+          "highlightWholeLine": true,
+          "zoom": 0
+        }
+      ],
+      "id": "demo-mkxqnpma-1a4j"
+    },
+    {
+      "title": "How to embedd",
+      "description": "Highlight the `helloWorld` function in the code.",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "indexer/Services/EmbeddingService.cs",
+          "position": "18:18",
+          "highlightWholeLine": true,
+          "zoom": 0
+        }
+      ],
+      "id": "demo-mkxqobvy-39rk"
+    },
+    {
+      "title": "Embedding Client",
+      "description": "Highlight the `helloWorld` function in the code.",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "indexer/Program.cs",
+          "position": "74:74",
+          "highlightWholeLine": true,
+          "zoom": 0
+        }
+      ],
+      "id": "demo-mkxqtpf5-y8oj"
+    },
+    {
+      "title": "MergeOrUploadDocumentsAsync",
+      "description": "Highlight the `helloWorld` function in the code.",
+      "steps": [
+        {
+          "action": "highlight",
+          "path": "indexer/Program.cs",
+          "position": "161:161",
+          "highlightWholeLine": true,
+          "zoom": 0
+        }
+      ],
+      "id": "demo-mkxqzpdm-pqhl"
+    }
+  ]
+}

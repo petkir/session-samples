@@ -110,7 +110,7 @@ public class CustomTools : ICustomTools
     {
         _logger.LogInformation("Getting all user fields");
         var result = JsonSerializer.Serialize(new { fields = _myFields });
-        return Task.FromResult(new ToolResult(result, ToolResultDirection.ToClient));
+        return Task.FromResult(new ToolResult(result, ToolResultDirection.ToServer));
     }
 
     private Task<ToolResult> SetMyFieldAsync(string argumentsJson)
@@ -135,7 +135,7 @@ public class CustomTools : ICustomTools
         _logger.LogInformation("Set field {Field} to {Value}", field, val);
 
         var result = JsonSerializer.Serialize(new { success = true, field = field, value = val });
-        return Task.FromResult(new ToolResult(result, ToolResultDirection.ToClient));
+        return Task.FromResult(new ToolResult(result, ToolResultDirection.ToServer));
     }
 
     #endregion
@@ -215,7 +215,7 @@ public class CustomTools : ICustomTools
     {
         _logger.LogInformation("Getting all todos");
         var result = JsonSerializer.Serialize(new { todos = _todos });
-        return Task.FromResult(new ToolResult(result, ToolResultDirection.ToClient));
+        return Task.FromResult(new ToolResult(result, ToolResultDirection.ToServer));
     }
 
     private Task<ToolResult> AddTodoAsync(string argumentsJson)
@@ -249,7 +249,7 @@ public class CustomTools : ICustomTools
         _logger.LogInformation("Added todo: {Title}", title);
 
         var result = JsonSerializer.Serialize(new { success = true, todo });
-        return Task.FromResult(new ToolResult(result, ToolResultDirection.ToClient));
+        return Task.FromResult(new ToolResult(result, ToolResultDirection.ToServer));
     }
 
     private Task<ToolResult> CompleteTodoAsync(string argumentsJson)
@@ -272,7 +272,7 @@ public class CustomTools : ICustomTools
         _logger.LogInformation("Completed todo: {Title}", todo.Title);
 
         var result = JsonSerializer.Serialize(new { success = true, todo });
-        return Task.FromResult(new ToolResult(result, ToolResultDirection.ToClient));
+        return Task.FromResult(new ToolResult(result, ToolResultDirection.ToServer));
     }
 
     #endregion
@@ -314,7 +314,7 @@ public class CustomTools : ICustomTools
         };
 
         var result = JsonSerializer.Serialize(currentData);
-        return Task.FromResult(new ToolResult(result, ToolResultDirection.ToClient));
+        return Task.FromResult(new ToolResult(result, ToolResultDirection.ToServer));
     }
 
     #endregion

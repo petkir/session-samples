@@ -1,0 +1,28 @@
+{
+  "$schema": "https://demotime.show/demo-time.schema.json",
+  "title": "05_close_all",
+  "description": "",
+  "version": 2,
+  "demos": [
+    {
+      "id": "demo-mkxrj6oc-tf0p",
+      "title": "Close all Sessions",
+      "steps": [
+        {
+          "action": "openTerminal",
+          "terminalId": "CloseAll"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "CloseAll",
+          "command": "pkill -f \"dotnet.*backend\""
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "CloseAll",
+          "command": "pkill -f vite"
+        }
+      ]
+    }
+  ]
+}

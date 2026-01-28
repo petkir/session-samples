@@ -121,21 +121,23 @@ public class RTMiddleTier
 
             try
             {
-                var completedTask = await Task.WhenAny(clientToServer, serverToClient);
-                _logger.LogInformation($"WebSocket task completed: {(completedTask == clientToServer ? "client->server" : "server->client")}");
+                // Wait for either task to complete
+                await Task.WhenAny(clientToServer, serverToClient);
+                _logger.LogInformation("One WebSocket direction completed. Waiting for cleanup...");
+                
+                // Give the other task a moment to complete gracefully
+                var remainingTask = clientToServer.IsCompleted ? serverToClient : clientToServer;
+                var timeout = Task.Delay(TimeSpan.FromSeconds(2));
+                await Task.WhenAny(remainingTask, timeout);
                 
                 // Check for exceptions
-                if (completedTask.IsFaulted)
+                if (clientToServer.IsFaulted)
                 {
-                    _logger.LogError(completedTask.Exception, "WebSocket task faulted");
+                    _logger.LogError(clientToServer.Exception, "Client->Server forwarding faulted");
                 }
-                else if (completedTask.IsCanceled)
+                if (serverToClient.IsFaulted)
                 {
-                    _logger.LogWarning("WebSocket task was canceled");
-                }
-                else
-                {
-                    _logger.LogInformation("WebSocket task completed normally");
+                    _logger.LogError(serverToClient.Exception, "Server->Client forwarding faulted");
                 }
             }
             catch (Exception ex)
@@ -168,11 +170,13 @@ public class RTMiddleTier
         if (!string.IsNullOrEmpty(SystemMessage))
         {
             session["instructions"] = SystemMessage;
+            _logger.LogInformation("Setting system instructions");
         }
 
         if (!string.IsNullOrEmpty(_voiceChoice))
         {
             session["voice"] = _voiceChoice;
+            _logger.LogInformation("Setting voice to: {Voice}", _voiceChoice);
         }
 
         if (Tools.Count > 0)
@@ -183,10 +187,18 @@ public class RTMiddleTier
                 toolsArray.Add(JsonSerializer.SerializeToNode(tool.Schema));
             }
             session["tools"] = toolsArray;
+            _logger.LogInformation("Configured {ToolCount} tools", Tools.Count);
         }
 
         var json = JsonSerializer.Serialize(sessionUpdate);
+        _logger.LogDebug("Session config: {Json}", json);
         var bytes = Encoding.UTF8.GetBytes(json);
+        
+        if (serverWebSocket.State != WebSocketState.Open)
+        {
+            throw new InvalidOperationException($"Cannot send session update - WebSocket state is {serverWebSocket.State}");
+        }
+        
         await serverWebSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, CancellationToken.None);
         _logger.LogInformation("Sent session configuration to server");
     }
@@ -207,7 +219,11 @@ public class RTMiddleTier
 
                 if (result.MessageType == WebSocketMessageType.Close)
                 {
-                    await targetWebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Client closed", CancellationToken.None);
+                    _logger.LogInformation("Received close message from source WebSocket");
+                    if (targetWebSocket.State == WebSocketState.Open || targetWebSocket.State == WebSocketState.CloseReceived)
+                    {
+                        await targetWebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Client closed", CancellationToken.None);
+                    }
                     break;
                 }
 
@@ -226,12 +242,21 @@ public class RTMiddleTier
                             var processedMessage = await messageProcessor(message, sourceWebSocket, targetWebSocket);
                             if (!string.IsNullOrEmpty(processedMessage))
                             {
-                                var bytes = Encoding.UTF8.GetBytes(processedMessage);
-                                await targetWebSocket.SendAsync(
-                                    new ArraySegment<byte>(bytes),
-                                    WebSocketMessageType.Text,
-                                    true,
-                                    CancellationToken.None);
+                                // Check target WebSocket state before sending
+                                if (targetWebSocket.State == WebSocketState.Open)
+                                {
+                                    var bytes = Encoding.UTF8.GetBytes(processedMessage);
+                                    await targetWebSocket.SendAsync(
+                                        new ArraySegment<byte>(bytes),
+                                        WebSocketMessageType.Text,
+                                        true,
+                                        CancellationToken.None);
+                                }
+                                else
+                                {
+                                    _logger.LogWarning("Target WebSocket is not open (State: {State}). Stopping forwarding.", targetWebSocket.State);
+                                    break;
+                                }
                             }
                         }
                     }
@@ -239,12 +264,29 @@ public class RTMiddleTier
                     {
                         _logger.LogError(ex, "Failed to parse message: {Message}", messageText);
                     }
+                    catch (WebSocketException ex)
+                    {
+                        _logger.LogWarning(ex, "WebSocket error while processing message");
+                        throw; // Re-throw to be caught by outer catch
+                    }
                 }
             }
+            
+            _logger.LogInformation("Message forwarding loop completed. Source state: {State}", sourceWebSocket.State);
+        }
+        catch (WebSocketException ex) when (ex.WebSocketErrorCode == WebSocketError.ConnectionClosedPrematurely || 
+                                             ex.Message.Contains("close handshake"))
+        {
+            _logger.LogWarning("Remote party closed the WebSocket connection unexpectedly");
         }
         catch (WebSocketException ex)
         {
-            _logger.LogWarning(ex, "WebSocket connection closed");
+            _logger.LogWarning(ex, "WebSocket connection error");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unexpected error in message forwarding");
+            throw;
         }
     }
 
@@ -316,27 +358,34 @@ public class RTMiddleTier
                         if (result.Direction == ToolResultDirection.ToServer)
                         {
                             // Send result back to server
-                            var toolResponse = new JsonObject
+                            if (serverWs.State == WebSocketState.Open)
                             {
-                                ["type"] = "conversation.item.create",
-                                ["item"] = new JsonObject
+                                var toolResponse = new JsonObject
                                 {
-                                    ["type"] = "function_call_output",
-                                    ["call_id"] = functionCallId,
-                                    ["output"] = result.Result
-                                }
-                            };
+                                    ["type"] = "conversation.item.create",
+                                    ["item"] = new JsonObject
+                                    {
+                                        ["type"] = "function_call_output",
+                                        ["call_id"] = functionCallId,
+                                        ["output"] = result.Result
+                                    }
+                                };
 
-                            var responseBytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(toolResponse));
-                            await serverWs.SendAsync(new ArraySegment<byte>(responseBytes), WebSocketMessageType.Text, true, CancellationToken.None);
+                                var responseBytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(toolResponse));
+                                await serverWs.SendAsync(new ArraySegment<byte>(responseBytes), WebSocketMessageType.Text, true, CancellationToken.None);
 
-                            // Trigger response generation
-                            var createResponse = new JsonObject
+                                // Trigger response generation
+                                var createResponse = new JsonObject
+                                {
+                                    ["type"] = "response.create"
+                                };
+                                var createBytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(createResponse));
+                                await serverWs.SendAsync(new ArraySegment<byte>(createBytes), WebSocketMessageType.Text, true, CancellationToken.None);
+                            }
+                            else
                             {
-                                ["type"] = "response.create"
-                            };
-                            var createBytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(createResponse));
-                            await serverWs.SendAsync(new ArraySegment<byte>(createBytes), WebSocketMessageType.Text, true, CancellationToken.None);
+                                _logger.LogWarning("Server WebSocket is not open (State: {State}). Cannot send tool response.", serverWs.State);
+                            }
                         }
                         else
                         {
