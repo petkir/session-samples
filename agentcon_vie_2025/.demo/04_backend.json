@@ -118,7 +118,7 @@
       "steps": [
         {
           "action": "highlight",
-          "path": "backend/Tools/RagTools.cs",
+          "path": "backend/Services/RTMiddleTier.cs",
           "position": "206:206",
           "highlightWholeLine": true
         }
