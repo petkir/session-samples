@@ -121,8 +121,44 @@
       "moves": [
         {
           "action": "highlight",
-          "path": "local_01_vector/elat.local.llm/elat.local.llm.qdrant.init/Services/QdrantInitService.cs",
-          "position": "139:151",
+          "path": "local_01_vector/elat.local.llm/elat.local.llm.Server/Program.cs",
+          "position": "40:43",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "scene-mqt7h9oc-67ca",
+      "title": "Its a tool",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_01_vector/elat.local.llm/elat.local.llm.Server/Program.cs",
+          "position": "34:34",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "scene-mqt7gwde-lujy",
+      "title": "Tool implementation",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_01_vector/elat.local.llm/elat.local.llm.Server/Plugins/DateTimePlugin.cs",
+          "position": "8:16",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "scene-mqt7gyi8-z130",
+      "title": "Key part of the tool",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_01_vector/elat.local.llm/elat.local.llm.Server/Plugins/DateTimePlugin.cs",
+          "position": "8:9",
           "highlightWholeLine": true
         }
       ]

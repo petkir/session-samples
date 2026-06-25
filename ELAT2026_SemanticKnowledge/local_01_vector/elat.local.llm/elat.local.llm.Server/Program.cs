@@ -8,6 +8,7 @@ using Microsoft.SemanticKernel.Memory;
 using Qdrant.Client;
 using elat.local.llm.Server.Data;
 using elat.local.llm.Server.Services;
+using elat.local.llm.Server.Plugins;
 using elat.local.llm.Server.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,8 @@ builder.Services.AddAuthorization();
 // Configure Semantic Kernel with Ollama
 #pragma warning disable SKEXP0070 // Type is for evaluation purposes only
 var kernelBuilder = builder.Services.AddKernel();
+
+kernelBuilder.Plugins.AddFromType<DateTimePlugin>();
 
 kernelBuilder.AddOllamaChatCompletion(
     modelId: builder.Configuration["Ollama:ModelId"] ?? "llama3.2",

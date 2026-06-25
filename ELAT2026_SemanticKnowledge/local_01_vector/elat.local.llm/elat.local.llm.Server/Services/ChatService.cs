@@ -204,13 +204,21 @@ public class ChatService : IChatService
         var responseBuilder = new System.Text.StringBuilder();
         var hasError = false;
         var errorMessage = string.Empty;
+#pragma warning disable SKEXP0070 // Type is for evaluation purposes only
+        var executionSettings = new OllamaPromptExecutionSettings
+        {
+            FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
+        };
+#pragma warning restore SKEXP0070
 
         IAsyncEnumerable<StreamingChatMessageContent>? streamingResponse = null;
         
         try
         {
             streamingResponse = _chatCompletionService.GetStreamingChatMessageContentsAsync(
-                chatHistory, 
+                chatHistory,
+                executionSettings,
+                _kernel,
                 cancellationToken: cancellationToken);
         }
         catch (Exception ex)
