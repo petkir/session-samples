@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <PackageJsonName Condition="$(PackageJsonName) == ''">elat.local.llm.client</PackageJsonName>
+    <PackageJsonPrivate Condition="$(PackageJsonPrivate) == ''">true</PackageJsonPrivate>
+    <PackageJsonVersion Condition="$(PackageJsonVersion) == ''">0.0.0</PackageJsonVersion>
+    <PackageJsonType Condition="$(PackageJsonType) == ''">module</PackageJsonType>
+    <PackageJsonScriptsDev Condition="$(PackageJsonScriptsDev) == ''">vite</PackageJsonScriptsDev>
+    <PackageJsonScriptsBuild Condition="$(PackageJsonScriptsBuild) == ''">tsc -b &amp;&amp; vite build</PackageJsonScriptsBuild>
+    <PackageJsonScriptsLint Condition="$(PackageJsonScriptsLint) == ''">eslint .</PackageJsonScriptsLint>
+    <PackageJsonScriptsPreview Condition="$(PackageJsonScriptsPreview) == ''">vite preview</PackageJsonScriptsPreview>
+    <PackageJsonDependenciesReact Condition="$(PackageJsonDependenciesReact) == ''">^19.1.0</PackageJsonDependenciesReact>
+    <PackageJsonDependenciesReactDom Condition="$(PackageJsonDependenciesReactDom) == ''">^19.1.0</PackageJsonDependenciesReactDom>
+    <PackageJsonDependenciesAzureMsalReact Condition="$(PackageJsonDependenciesAzureMsalReact) == ''">^3.0.14</PackageJsonDependenciesAzureMsalReact>
+    <PackageJsonDependenciesMantineCore Condition="$(PackageJsonDependenciesMantineCore) == ''">^7.14.3</PackageJsonDependenciesMantineCore>
+    <PackageJsonDependenciesMantineHooks Condition="$(PackageJsonDependenciesMantineHooks) == ''">^7.14.3</PackageJsonDependenciesMantineHooks>
+    <PackageJsonDependenciesMantineNotifications Condition="$(PackageJsonDependenciesMantineNotifications) == ''">^7.14.3</PackageJsonDependenciesMantineNotifications>
+    <PackageJsonDependenciesMantineSpotlight Condition="$(PackageJsonDependenciesMantineSpotlight) == ''">^7.14.3</PackageJsonDependenciesMantineSpotlight>
+    <PackageJsonDependenciesTablerIconsReact Condition="$(PackageJsonDependenciesTablerIconsReact) == ''">^3.31.0</PackageJsonDependenciesTablerIconsReact>
+    <PackageJsonDependenciesAxios Condition="$(PackageJsonDependenciesAxios) == ''">^1.7.2</PackageJsonDependenciesAxios>
+    <PackageJsonDependenciesReactRouterDom Condition="$(PackageJsonDependenciesReactRouterDom) == ''">^7.1.0</PackageJsonDependenciesReactRouterDom>
+    <PackageJsonDevdependenciesEslintJs Condition="$(PackageJsonDevdependenciesEslintJs) == ''">^9.29.0</PackageJsonDevdependenciesEslintJs>
+    <PackageJsonDevdependenciesTypesReact Condition="$(PackageJsonDevdependenciesTypesReact) == ''">^19.1.8</PackageJsonDevdependenciesTypesReact>
+    <PackageJsonDevdependenciesTypesReactDom Condition="$(PackageJsonDevdependenciesTypesReactDom) == ''">^19.1.6</PackageJsonDevdependenciesTypesReactDom>
+    <PackageJsonDevdependenciesVitejsPluginReact Condition="$(PackageJsonDevdependenciesVitejsPluginReact) == ''">^4.5.2</PackageJsonDevdependenciesVitejsPluginReact>
+    <PackageJsonDevdependenciesEslint Condition="$(PackageJsonDevdependenciesEslint) == ''">^9.29.0</PackageJsonDevdependenciesEslint>
+    <PackageJsonDevdependenciesEslintPluginReactHooks Condition="$(PackageJsonDevdependenciesEslintPluginReactHooks) == ''">^5.2.0</PackageJsonDevdependenciesEslintPluginReactHooks>
+    <PackageJsonDevdependenciesEslintPluginReactRefresh Condition="$(PackageJsonDevdependenciesEslintPluginReactRefresh) == ''">^0.4.20</PackageJsonDevdependenciesEslintPluginReactRefresh>
+    <PackageJsonDevdependenciesGlobals Condition="$(PackageJsonDevdependenciesGlobals) == ''">^16.2.0</PackageJsonDevdependenciesGlobals>
+    <PackageJsonDevdependenciesSass Condition="$(PackageJsonDevdependenciesSass) == ''">^1.82.0</PackageJsonDevdependenciesSass>
+    <PackageJsonDevdependenciesTypescript Condition="$(PackageJsonDevdependenciesTypescript) == ''">~5.8.3</PackageJsonDevdependenciesTypescript>
+    <PackageJsonDevdependenciesTypescriptEslint Condition="$(PackageJsonDevdependenciesTypescriptEslint) == ''">^8.34.1</PackageJsonDevdependenciesTypescriptEslint>
+    <PackageJsonDevdependenciesVite Condition="$(PackageJsonDevdependenciesVite) == ''">^7.0.0</PackageJsonDevdependenciesVite>
+    <PackageJsonDevdependenciesTypesNode Condition="$(PackageJsonDevdependenciesTypesNode) == ''">^22.13.14</PackageJsonDevdependenciesTypesNode>
+  </PropertyGroup>
+</Project>
