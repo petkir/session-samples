@@ -1,0 +1,57 @@
+@baseUrl = https://url.search.windows.net
+@apiVersion = 2026-05-01-Preview
+@knowledgeBase = knowledgebaseblobstore
+@aadToken = 
+
+### 1) MCP Initialize
+POST {{baseUrl}}/knowledgebases/{{knowledgeBase}}/mcp?api-version={{apiVersion}}
+Content-Type: application/json
+Accept: application/json, text/event-stream
+Authorization: Bearer {{aadToken}}
+
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"method": "initialize",
+	"params": {
+		"protocolVersion": "2025-03-26",
+		"capabilities": {},
+		"clientInfo": {
+			"name": "rest-client",
+			"version": "1.0.0"
+		}
+	}
+}
+
+### 2) MCP Tools List
+POST {{baseUrl}}/knowledgebases/{{knowledgeBase}}/mcp?api-version={{apiVersion}}
+Content-Type: application/json
+Accept: application/json, text/event-stream
+Authorization: Bearer {{aadToken}}
+
+{
+	"jsonrpc": "2.0",
+	"id": 2,
+	"method": "tools/list",
+	"params": {}
+}
+
+### 3) MCP Tools Call – Frage stellen
+POST {{baseUrl}}/knowledgebases/{{knowledgeBase}}/mcp?api-version={{apiVersion}}
+Content-Type: application/json
+Accept: application/json, text/event-stream
+Authorization: Bearer {{aadToken}}
+
+{
+	"jsonrpc": "2.0",
+	"id": 3,
+	"method": "tools/call",
+	"params": {
+		"name": "knowledge_base_retrieve",
+		"arguments": {
+			"queries": [
+				"What is Microsoft 365 Copilot?"
+			]
+		}
+	}
+}

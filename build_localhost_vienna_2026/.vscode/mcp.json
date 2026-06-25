@@ -1,0 +1,10 @@
+{
+	"servers": {
+
+		"my-mcp-server-workiq": {
+			"type": "stdio",
+			"command": "/Users/pkirschner/.nvm/versions/node/v22.14.0/bin/npx",
+			"args": ["-y", "@microsoft/workiq@latest", "mcp"]
+		}
+	}
+}

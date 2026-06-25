@@ -1,0 +1,27 @@
+https://ai.azure.com/nextgen/r/YD8uPsGjTVyX24f_IOMuHw,Build_local,,buildlocalviennafoundry-resource,buildlocalviennafoundryiq/build/knowledge/search/c/buildlocalviennasearcfv359h
+
+First Knowledge with WebIQ
+
+https://ai.azure.com/nextgen/r/YD8uPsGjTVyX24f_IOMuHw%2CBuild_local%2C%2Cbuildlocalviennafoundry-resource%2Cbuildlocalviennafoundryiq/build/knowledge/search/c/buildlocalviennasearcfv359h/bases/knowledgebase715
+
+Knowledge with azureBlob
+
+Blob:
+https://portal.azure.com/#view/Microsoft_Azure_Storage/ContainerMenuBlade/~/overview/storageAccountId/%2Fsubscriptions%2F603f2e3e-c1a3-4d5c-97db-87ff20e32e1f%2FresourceGroups%2FBuild_local%2Fproviders%2FMicrosoft.Storage%2FstorageAccounts%2Fbuildlocalviennastorage/path/documents/etag/%220x8DECAB046B58F53%22/defaultId//publicAccessVal/None
+
+Knowledge:
+https://ai.azure.com/nextgen/r/YD8uPsGjTVyX24f_IOMuHw%2CBuild_local%2C%2Cbuildlocalviennafoundry-resource%2Cbuildlocalviennafoundryiq/build/knowledge/search/c/buildlocalviennasearcfv359h/bases/knowledgebaseblobstore
+
+
+Test TestAgentFoundryIQ:
+https://ai.azure.com/nextgen/r/YD8uPsGjTVyX24f_IOMuHw,Build_local,,buildlocalviennafoundry-resource,buildlocalviennafoundryiq/build/agents/TestAgentFoundryIQBlob/build
+
+
+What is Microsoft 365 Copilot?
+
+Show traces!!!
+
+show Background Search Service:
+https://portal.azure.com/#@kirschner.zone/resource/subscriptions/603f2e3e-c1a3-4d5c-97db-87ff20e32e1f/resourceGroups/Build_local/providers/Microsoft.Search/searchServices/buildlocalviennasearch/knowledgeSources
+
+
