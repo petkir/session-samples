@@ -1,29 +1,29 @@
 {
   "$schema": "https://demotime.show/demo-time.schema.json",
-  "title": "02 Local Vector",
+  "title": "01 Local Vector",
   "version": 3,
-  "demos": [
+  "scenes": [
     {
       "id": "demo-min0o41e-n2tc",
       "title": "Demo 2",
-      "steps": [
+      "moves": [
         {
           "action": "open",
-          "path": "local_02_vector/sample_files/page-11.pdf"
+          "path": "local_01_vector/sample_files/page-11.pdf"
         }
       ]
     },
     {
       "id": "demo-min0h56d-w9g6",
       "title": "start",
-      "steps": [
+      "moves": [
         {
           "action": "openTerminal",
           "terminalId": "vectorsample"
         },
         {
           "action": "executeTerminalCommand",
-          "command": "cd local_02_vector/",
+          "command": "cd local_01_vector/",
           "terminalId": "vectorsample"
         },
         {
@@ -36,10 +36,10 @@
     {
       "id": "demo-min0xcaq-okft",
       "title": "get files",
-      "steps": [
+      "moves": [
         {
           "action": "highlight",
-          "path": "local_02_vector/elat.local.llm/elat.local.llm.qdrant.init/Program.cs",
+          "path": "local_01_vector/elat.local.llm/elat.local.llm.qdrant.init/Program.cs",
           "position": "72:72",
           "highlightWholeLine": true
         }
@@ -48,10 +48,10 @@
     {
       "id": "demo-min0xz5l-q77k",
       "title": "Extract Text",
-      "steps": [
+      "moves": [
         {
           "action": "highlight",
-          "path": "local_02_vector/elat.local.llm/elat.local.llm.qdrant.init/Program.cs",
+          "path": "local_01_vector/elat.local.llm/elat.local.llm.qdrant.init/Program.cs",
           "position": "78:78",
           "highlightWholeLine": true
         }
@@ -60,10 +60,10 @@
     {
       "id": "demo-min0yq1w-3vu8",
       "title": "Add to Index",
-      "steps": [
+      "moves": [
         {
           "action": "highlight",
-          "path": "local_02_vector/elat.local.llm/elat.local.llm.qdrant.init/Program.cs",
+          "path": "local_01_vector/elat.local.llm/elat.local.llm.qdrant.init/Program.cs",
           "position": "82:82",
           "highlightWholeLine": true
         }
@@ -72,10 +72,10 @@
     {
       "id": "demo-min15nnd-n6g1",
       "title": "Get Vector",
-      "steps": [
+      "moves": [
         {
           "action": "highlight",
-          "path": "local_02_vector/elat.local.llm/elat.local.llm.qdrant.init/Services/QdrantInitService.cs",
+          "path": "local_01_vector/elat.local.llm/elat.local.llm.qdrant.init/Services/QdrantInitService.cs",
           "position": "125:125",
           "highlightWholeLine": true
         }
@@ -84,10 +84,10 @@
     {
       "id": "demo-min5ev6f-ebfl",
       "title": "Show Embedding",
-      "steps": [
+      "moves": [
         {
           "action": "highlight",
-          "path": "local_02_vector/elat.local.llm/elat.local.llm.qdrant.init/ollama-embeddings.http",
+          "path": "local_01_vector/elat.local.llm/elat.local.llm.qdrant.init/ollama-embeddings.http",
           "position": "17:23",
           "highlightWholeLine": true
         }
@@ -96,10 +96,10 @@
     {
       "id": "demo-min5clzn-gzcm",
       "title": "Store Vector",
-      "steps": [
+      "moves": [
         {
           "action": "highlight",
-          "path": "local_02_vector/elat.local.llm/elat.local.llm.qdrant.init/Services/QdrantInitService.cs",
+          "path": "local_01_vector/elat.local.llm/elat.local.llm.qdrant.init/Services/QdrantInitService.cs",
           "position": "139:151",
           "highlightWholeLine": true
         }
@@ -108,7 +108,7 @@
     {
       "id": "demo-minaule6-fcwj",
       "title": "show Quadrant Dashboard",
-      "steps": [
+      "moves": [
         {
           "action": "openWebsite",
           "url": "http://localhost:6333/dashboard#/collections/knowledge_base"
@@ -116,9 +116,21 @@
       ]
     },
     {
+      "id": "demo-min5clzn-gzc1",
+      "title": "Get Result",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_01_vector/elat.local.llm/elat.local.llm.qdrant.init/Services/QdrantInitService.cs",
+          "position": "139:151",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
       "id": "demo-minavrv3-8z1s",
       "title": "Show Chat",
-      "steps": [
+      "moves": [
         {
           "action": "openWebsite",
           "url": "https://localhost:54375/knowledge"
@@ -128,7 +140,7 @@
     {
       "id": "demo-mif2fed3-3t95",
       "title": "close ollama",
-      "steps": [
+      "moves": [
         {
           "action": "executeTerminalCommand",
           "command": "pkill ollama  ",

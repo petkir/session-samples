@@ -1,0 +1,42 @@
+// Login component styles
+.login-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
+  // Dark mode background
+  [data-mantine-color-scheme="dark"] & {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  }
+}
+
+.login-card {
+  // Additional styling for the login card
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  [data-mantine-color-scheme="dark"] & {
+    background: rgba(26, 27, 30, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.login-header {
+  margin-bottom: 2rem;
+}
+
+.login-button {
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.login-footer {
+  margin-top: 2rem;
+}

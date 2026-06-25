@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "elat.local.llm.Server", "elat.local.llm.Server\elat.local.llm.Server.csproj", "{21A6830C-4DD5-48B0-B1D3-25F3F274D47E}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "elat.local.llm.client", "elat.local.llm.client\elat.local.llm.client.esproj", "{C932C999-2132-4076-B3BA-B6CA334FDCC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "elat.local.llm.Server.Test", "elat.local.llm.Server.Test\elat.local.llm.Server.Test.csproj", "{A1B2C3D4-E5F6-7890-1234-567890ABCDEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21A6830C-4DD5-48B0-B1D3-25F3F274D47E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21A6830C-4DD5-48B0-B1D3-25F3F274D47E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21A6830C-4DD5-48B0-B1D3-25F3F274D47E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21A6830C-4DD5-48B0-B1D3-25F3F274D47E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C932C999-2132-4076-B3BA-B6CA334FDCC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C932C999-2132-4076-B3BA-B6CA334FDCC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C932C999-2132-4076-B3BA-B6CA334FDCC1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C932C999-2132-4076-B3BA-B6CA334FDCC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C932C999-2132-4076-B3BA-B6CA334FDCC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C932C999-2132-4076-B3BA-B6CA334FDCC1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-1234-567890ABCDEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-1234-567890ABCDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-1234-567890ABCDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-1234-567890ABCDEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

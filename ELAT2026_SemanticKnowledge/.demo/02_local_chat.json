@@ -1,0 +1,220 @@
+{
+  "$schema": "https://demotime.show/demo-time.schema.json",
+  "title": "02 Local Chat",
+  "version": 3,
+  "scenes": [
+    {
+      "id": "demo-mimzfdpg-w048",
+      "title": "start LLM",
+      "moves": [
+        {
+          "action": "openTerminal",
+          "terminalId": "demo01"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "command": " cd local_02_chat",
+          "terminalId": "demo01"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "demo01",
+          "command": "./setup-macos.sh"
+        }
+      ]
+    },
+    {
+      "id": "demo-mimzk5ul-cfhv",
+      "title": "SQL ChatHistory",
+      "moves": [
+        {
+          "action": "open",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.Server/Program.cs",
+          "disabled": true
+        },
+        {
+          "action": "highlight",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.Server/Program.cs",
+          "position": "15:17",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mimzns9o-93lj",
+      "title": "Auth",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.Server/Program.cs",
+          "position": "18:24",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mimzp3f6-qm1d",
+      "title": "Kernel",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.Server/Program.cs",
+          "position": "27:30",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mimzqfmo-dlne",
+      "title": "Chat Service (Scoped)",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.Server/Program.cs",
+          "position": "34:34",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mimzw5n9-1ybo",
+      "title": "Get old messages",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.Server/Controllers/ChatController.cs",
+          "position": "272:272",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mimzxtor-6aob",
+      "title": "Get save new messages ",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.Server/Controllers/ChatController.cs",
+          "position": "299:299",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mimzz53e-cjxa",
+      "title": "Send To LLM",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.Server/Controllers/ChatController.cs",
+          "position": "308:308",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mimzztum-0xrl",
+      "title": "Send Response to Client",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.Server/Controllers/ChatController.cs",
+          "position": "310:321",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-min0128e-un4l",
+      "title": "Send End Message to Client",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.Server/Controllers/ChatController.cs",
+          "position": "330:335",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-min03vyj-48wp",
+      "title": "Frontend make json",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.client/src/components/ChatInterface.tsx",
+          "position": "279:290",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-min05n39-nkb0",
+      "title": "Send Request",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.client/src/components/ChatInterface.tsx",
+          "position": "296:296",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-min071y4-wem8",
+      "title": "process response",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.client/src/components/ChatInterface.tsx",
+          "position": "318:321",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-min089yc-tdh9",
+      "title": "endless loop",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_02_chat/elat.local.llm/elat.local.llm.client/src/components/ChatInterface.tsx",
+          "highlightWholeLine": true,
+          "position": "305:307"
+        }
+      ]
+    },
+    {
+      "id": "demo-mipz13k9-4qof",
+      "title": "Open web URL",
+      "moves": [
+        {
+          "action": "openWebsite",
+          "url": "https://localhost:54375/"
+        }
+      ]
+    },
+    {
+      "id": "demo-mif2fed3-3t35",
+      "title": "close ollama",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "command": "pkill ollama  ",
+          "terminalId": "demo01",
+          "insertTypingMode": "character-by-character",
+          "insertTypingSpeed": 200
+        },
+        {
+          "action": "executeTerminalCommand",
+          "command": "lsof -ti:5227 | xargs kill -9",
+          "terminalId": "demo01"
+        },
+        {
+          "action": "closeTerminal",
+          "terminalId": "demo01"
+        }
+      ]
+    }
+  ]
+}

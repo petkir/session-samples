@@ -1,0 +1,198 @@
+// Chat Interface SASS styles
+.chat-interface {
+  display: flex;
+  height: calc(100vh - 60px); // Subtract header height
+  width: 100%; // Responsive Design
+}
+
+.chat-sidebar {
+  width: 300px;
+  background-color: var(--mantine-color-gray-0);
+  border-right: 1px solid var(--mantine-color-gray-3);
+  display: flex;
+  flex-direction: column;
+  
+  [data-mantine-color-scheme="dark"] & {
+    background-color: var(--mantine-color-dark-7);
+    border-right-color: var(--mantine-color-dark-4);
+  }
+}
+
+.sidebar-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sessions-scroll {
+  flex: 1;
+  height: calc(100vh - 200px); // Adjust based on header and button height
+}
+
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--mantine-color-white);
+  position: relative; // Required for absolute positioning of drag overlay
+  
+  [data-mantine-color-scheme="dark"] & {
+    background-color: var(--mantine-color-dark-8);
+  }
+}
+
+.chat-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+  background-color: var(--mantine-color-gray-0);
+  
+  [data-mantine-color-scheme="dark"] & {
+    background-color: var(--mantine-color-dark-7);
+    border-bottom-color: var(--mantine-color-dark-4);
+  }
+}
+
+.chat-messages {
+  flex: 1;
+  height: calc(100vh - 200px); // Adjust based on header and input heights
+}
+
+.chat-input-section {
+  border-top: 1px solid var(--mantine-color-gray-3);
+  
+  [data-mantine-color-scheme="dark"] & {
+    border-top-color: var(--mantine-color-dark-4);
+  }
+}
+
+.streaming-cursor {
+  animation: blink 1s infinite;
+  color: var(--mantine-color-blue-6);
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.file-input-hidden {
+  display: none;
+}
+
+// Session item highlighting
+.session-item {
+  &.active {
+    background-color: var(--mantine-color-blue-1);
+    
+    [data-mantine-color-scheme="dark"] & {
+      background-color: var(--mantine-color-blue-9);
+    }
+  }
+}
+
+// Message styles
+.message {
+  &.user {
+    .message-content {
+      background-color: var(--mantine-color-blue-1);
+      
+      [data-mantine-color-scheme="dark"] & {
+        background-color: var(--mantine-color-blue-9);
+      }
+    }
+  }
+  
+  &.assistant {
+    .message-content {
+      background-color: var(--mantine-color-gray-1);
+      
+      [data-mantine-color-scheme="dark"] & {
+        background-color: var(--mantine-color-dark-6);
+      }
+    }
+  }
+}
+
+// File preview grid
+.file-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+// Drag and Drop Overlay
+.drag-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 123, 255, 0.1);
+  border: 2px dashed var(--mantine-color-blue-5);
+  z-index: 999; // Reduced to be below modal
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+
+  
+  [data-mantine-color-scheme="dark"] & {
+    background-color: rgba(0, 123, 255, 0.2);
+    border-color: var(--mantine-color-blue-4);
+  }
+}
+
+.drag-overlay-content {
+  text-align: center;
+  padding: 2rem;
+  color: var(--mantine-color-blue-7);
+  
+  [data-mantine-color-scheme="dark"] & {
+    color: var(--mantine-color-blue-3);
+  }
+  
+  svg {
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+}
+
+// Responsive Design
+
+@media (max-width: 768px) {
+  .chat-interface {
+    flex-direction: column;
+  }
+  
+  .chat-sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--mantine-color-gray-3);
+    
+    [data-mantine-color-scheme="dark"] & {
+      border-bottom-color: var(--mantine-color-dark-4);
+    }
+  }
+  
+  .sessions-scroll {
+    height: 150px;
+  }
+  
+  .chat-messages {
+    height: calc(100vh - 350px);
+  }
+}
+
+// Ensure modal overlay and content are properly visible
+.mantine-Modal-overlay {
+  z-index: 2000 !important;
+}
+
+.mantine-Modal-inner {
+  left: 0px !important;
+
+}

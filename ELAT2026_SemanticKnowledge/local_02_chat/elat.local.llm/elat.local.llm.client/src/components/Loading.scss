@@ -1,0 +1,17 @@
+// Loading component styles
+.loading-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  // Light mode background
+  [data-mantine-color-scheme="light"] & {
+    background-color: var(--mantine-color-gray-0);
+  }
+  
+  // Dark mode background
+  [data-mantine-color-scheme="dark"] & {
+    background-color: var(--mantine-color-dark-8);
+  }
+}

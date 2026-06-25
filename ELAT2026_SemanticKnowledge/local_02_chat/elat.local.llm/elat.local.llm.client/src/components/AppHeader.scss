@@ -1,0 +1,47 @@
+// App Header styles
+.app-header {
+  height: 60px;
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+  background-color: var(--mantine-color-white);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 1rem;
+  
+  [data-mantine-color-scheme="dark"] & {
+    border-bottom-color: var(--mantine-color-dark-4);
+    background-color: var(--mantine-color-dark-7);
+  }
+  
+  // Ensure proper spacing between left and right sections
+  > .mantine-Group-root {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.user-button {
+  padding: 8px 12px;
+  border-radius: var(--mantine-radius-md);
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  max-width: 200px;
+  
+  &:hover {
+    background-color: var(--mantine-color-gray-1);
+    
+    [data-mantine-color-scheme="dark"] & {
+      background-color: var(--mantine-color-dark-6);
+    }
+  }
+  
+  &:active {
+    background-color: var(--mantine-color-gray-2);
+    
+    [data-mantine-color-scheme="dark"] & {
+      background-color: var(--mantine-color-dark-5);
+    }
+  }
+}
