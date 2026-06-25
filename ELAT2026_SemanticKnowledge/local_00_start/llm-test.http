@@ -1,0 +1,179 @@
+### Test Ollama/DeepSeek Local LLM
+### Make sure the LLM is running: ./start-llm.sh
+
+@baseUrl = http://localhost:11434
+
+### 1. Check Ollama version
+GET {{baseUrl}}/api/version
+
+### 2. List available models
+GET {{baseUrl}}/api/tags
+
+### 3. Simple chat completion with llama3.2
+POST {{baseUrl}}/api/chat
+Content-Type: application/json
+
+{
+  "model": "llama3.2",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is the capital of Irland?"
+    }
+  ],
+  "stream": false
+}
+
+### 4. Chat with DeepSeek model
+POST {{baseUrl}}/api/chat
+Content-Type: application/json
+
+{
+  "model": "deepseek-r1:1.5b",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Explain recursion in simple terms"
+    }
+  ],
+   "stream": true
+}
+
+### 5. Multi-turn conversation
+POST {{baseUrl}}/api/chat
+Content-Type: application/json
+
+{
+  "model": "llama3.2",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful coding assistant, make smale output fucus on code not on text"
+    },
+    {
+      "role": "user",
+      "content": "Write a Node function to for fitlter an Object array by a key value"
+   }
+  ],
+  "stream": false
+}
+
+### 5.1. Multi-turn conversation
+POST {{baseUrl}}/api/chat
+Content-Type: application/json
+
+{
+  "model": "llama3.2",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful coding assistant, make smale output fucus on code not on text"
+    },
+    {
+      "role": "user",
+      "content": "Write a Node function to for fitlter an Object array by a key value"
+   },
+   {
+    "role": "assistant",
+    "content": "```javascript\n/**\n * Filters an object array based on a specific key value.\n *\n * @param {Object[]} arr - The input object array.\n * @param {string} key - The key to filter the objects.\n * @param {*} value - The value to filter with.\n * @returns {Object[]} The filtered object array.\n */\nfunction filterObjects(arr, key, value) {\n  return arr.filter(obj =\u003e obj[key] === value);\n}\n\n// Example usage:\nconst objects = [\n  { id: 1, name: 'John', age: 25 },\n  { id: 2, name: 'Jane', age: 30 },\n  { id: 3, name: 'Bob', age: 25 }\n];\n\nconst filteredObjects = filterObjects(objects, 'age', 25);\nconsole.log(filteredObjects); // Output: [{ id: 1, name: 'John', age: 25 }, { id: 3, name: 'Bob', age: 25 }]\n```\n\nAlternatively, you can use the `findIndex` method to achieve the same result in a more concise way:\n\n```javascript\nfunction filterObjects(arr, key, value) {\n  return arr.filter((obj, index) =\u003e arr.findIndex(o =\u003e o[key] === value) === index);\n}\n```\n\nThis implementation uses the `findIndex` method to find the index of the first object that matches the specified key and value. If no matching object is found, it returns `-1`. The filter callback then checks if the current index matches this result."
+  },   
+  {
+      "role": "user",
+      "content": "Now modify the function to make it case insensitive for string values"
+    }
+  ],
+  "stream": false
+}
+
+### 6. Chat with streaming response
+POST {{baseUrl}}/api/chat
+Content-Type: application/json
+
+{
+  "model": "llama3.2",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Tell me a short joke"
+    }
+  ],
+  "stream": true
+}
+
+### 7. Generate completion (alternative API)
+POST {{baseUrl}}/api/generate
+Content-Type: application/json
+
+{
+  "model": "llama3.2",
+  "prompt": "The three primary colors are",
+  "stream": false
+}
+
+### 8. Chat with temperature control (more creative)
+POST {{baseUrl}}/api/chat
+Content-Type: application/json
+
+{
+  "model": "llama3.2",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a creative haiku about coding"
+    }
+  ],
+  "stream": false,
+  "options": {
+    "temperature": 0.9,
+    "top_p": 0.9
+  }
+}
+
+### 9. Chat with temperature control (more deterministic)
+POST {{baseUrl}}/api/chat
+Content-Type: application/json
+
+{
+  "model": "llama3.2",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is 2+2?"
+    }
+  ],
+  "stream": false,
+  "options": {
+    "temperature": 0.1
+  }
+}
+
+### 10. Code generation with qwen2.5-coder (if available)
+POST {{baseUrl}}/api/chat
+Content-Type: application/json
+
+{
+  "model": "qwen2.5-coder:1.5b",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a TypeScript function to debounce a function call"
+    }
+  ],
+  "stream": false
+}
+
+### 11. Pull a new model (this will take time)
+# POST {{baseUrl}}/api/pull
+# Content-Type: application/json
+# 
+# {
+#   "name": "llama3.2:1b"
+# }
+
+### 12. Show model information
+POST {{baseUrl}}/api/show
+Content-Type: application/json
+
+{
+  "name": "llama3.2"
+}

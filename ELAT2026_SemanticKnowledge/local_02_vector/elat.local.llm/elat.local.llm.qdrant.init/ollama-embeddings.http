@@ -1,0 +1,23 @@
+# VS Code REST Client file to test Ollama embeddings
+# Requires the REST Client extension (humao.rest-client)
+#
+# Usage:
+# - Click "Send Request" above a request block
+# - Inspect the JSON response for `embedding` or `embeddings`
+# - Expected embedding length:
+#   - all-minilm: 384
+#   - nomic-embed-text:latest: 768
+
+@host = http://localhost:11434
+@model = all-minilm
+@text = The quick brown.
+
+
+### Embeddings via /api/embed using `input` (alt endpoint)
+POST {{host}}/api/embed
+Content-Type: application/json
+
+{
+  "model": "{{model}}",
+  "input": "{{text}}"
+}

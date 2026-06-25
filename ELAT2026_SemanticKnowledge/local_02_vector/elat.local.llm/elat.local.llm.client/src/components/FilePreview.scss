@@ -1,0 +1,19 @@
+.file-preview {
+  transition: all 0.2s ease;
+  
+  &:hover {
+    box-shadow: var(--mantine-shadow-md);
+    transform: translateY(-2px);
+  }
+}
+
+.image-preview-container {
+  position: relative;
+}
+
+.file-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}

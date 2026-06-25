@@ -1,0 +1,57 @@
+### elat Local LLM Chat API - HTTP Test File
+### Base URL: https://localhost:7154
+
+# Note: Replace YOUR_JWT_TOKEN with actual JWT token from Azure AD
+
+### Get all chat sessions
+GET https://localhost:7154/api/chat/sessions
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Create a new chat session
+POST https://localhost:7154/api/chat/sessions
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+{
+  "title": "My Test Chat Session"
+}
+
+### Get a specific chat session
+GET https://localhost:7154/api/chat/sessions/{{sessionId}}
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Send a message to a chat session (text only)
+POST https://localhost:7154/api/chat/sessions/{{sessionId}}/messages
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: multipart/form-data
+
+--boundary123
+Content-Disposition: form-data; name="content"
+
+Hello, how are you today?
+--boundary123--
+
+### Send a message with file attachment
+POST https://localhost:7154/api/chat/sessions/{{sessionId}}/messages
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: multipart/form-data
+
+--boundary123
+Content-Disposition: form-data; name="content"
+
+Can you analyze this document for me?
+--boundary123
+Content-Disposition: form-data; name="files"; filename="document.pdf"
+Content-Type: application/pdf
+
+< ./path/to/your/document.pdf
+--boundary123--
+
+### Get an attachment
+GET https://localhost:7154/api/chat/attachments/{{attachmentId}}
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Get weather forecast (demo endpoint)
+GET https://localhost:7154/WeatherForecast
+
+###

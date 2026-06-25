@@ -1,0 +1,47 @@
+[
+  {
+    "content": "Microsoft 365 is a comprehensive suite of productivity applications and cloud services. It includes familiar applications like Word, Excel, PowerPoint, and Outlook, along with cloud-based services such as OneDrive, SharePoint, and Teams. Microsoft 365 enables collaboration and productivity across devices and platforms.",
+    "fileName": "microsoft-365-overview.txt",
+    "category": "Microsoft 365"
+  },
+  {
+    "content": "SharePoint is a web-based collaborative platform that integrates with Microsoft Office. It's primarily sold as a document management and storage system, but the product is highly configurable and its usage varies substantially among organizations. SharePoint can be used to create websites, store and organize information, and enable collaboration.",
+    "fileName": "sharepoint-basics.txt",
+    "category": "SharePoint"
+  },
+  {
+    "content": "Microsoft Teams is a business communication platform developed by Microsoft as part of the Microsoft 365 family of products. Teams primarily competes with the similar service Slack, offering workspace chat and videoconferencing, file storage, and application integration. Teams replaced Skype for Business.",
+    "fileName": "teams-overview.txt",
+    "category": "Microsoft Teams"
+  },
+  {
+    "content": "Power Platform is a line of business intelligence, app development, and app connectivity software applications. It consists of Power Apps for application development, Power Automate for workflow automation, Power BI for business analytics, and Power Virtual Agents for chatbot creation. These tools work together to provide comprehensive business solutions.",
+    "fileName": "power-platform-intro.txt",
+    "category": "Power Platform"
+  },
+  {
+    "content": "Azure Active Directory (Azure AD) is Microsoft's cloud-based identity and access management service. It helps employees sign in and access resources in external resources (such as Microsoft 365, the Azure portal, and thousands of other SaaS applications) and internal resources (such as apps on your corporate network and intranet).",
+    "fileName": "azure-ad-basics.txt",
+    "category": "Azure AD"
+  },
+  {
+    "content": "OneDrive is a file hosting service operated by Microsoft. It allows users to store files and personal data like Windows settings or BitLocker recovery keys in the cloud, synchronize files across Android, Windows Phone, iOS, Xbox 360, Xbox One, and computers (Windows and macOS), and share files.",
+    "fileName": "onedrive-overview.txt",
+    "category": "OneDrive"
+  },
+  {
+    "content": "Microsoft Viva is an employee experience platform that brings together communications, knowledge, learning, resources, and insights powered by Microsoft 365 and experienced primarily through Microsoft Teams. Viva includes Viva Connections, Viva Insights, Viva Learning, and Viva Topics.",
+    "fileName": "viva-platform.txt",
+    "category": "Microsoft Viva"
+  },
+  {
+    "content": "Microsoft Graph is the gateway to data and intelligence in Microsoft 365. It provides a unified programmability model that you can use to access the tremendous amount of data in Microsoft 365, Windows 10, and Enterprise Mobility + Security. Through Microsoft Graph APIs, developers can access data across Microsoft services.",
+    "fileName": "microsoft-graph.txt",
+    "category": "Microsoft Graph"
+  },
+  {
+    "content": "Ireland is a green and lush country known for its stunning landscapes, rich cultural heritage, and friendly people. It boasts historic castles, vibrant cities like Dublin and Galway, and scenic routes such as the Wild Atlantic Way. Ireland is also famous for its traditional music, literature, and festivals.",
+    "fileName": "ireland-overview.txt",
+    "category": "Ireland"
+  }
+]

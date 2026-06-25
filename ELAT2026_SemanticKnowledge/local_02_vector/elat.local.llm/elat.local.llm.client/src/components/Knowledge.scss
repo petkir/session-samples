@@ -1,0 +1,31 @@
+.knowledge-page {
+  .document-card {
+    height: 100%;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--mantine-shadow-md);
+    }
+  }
+  
+  .document-content {
+    flex: 1;
+  }
+  
+  // Ensure consistent spacing in tabs
+  .mantine-Tabs-panel {
+    padding-top: var(--mantine-spacing-md);
+  }
+}
+
+// Dark theme support
+[data-mantine-color-scheme="dark"] {
+  .knowledge-page {
+    .document-card {
+      &:hover {
+        background-color: var(--mantine-color-dark-6);
+      }
+    }
+  }
+}

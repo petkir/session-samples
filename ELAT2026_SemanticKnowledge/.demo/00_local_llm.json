@@ -1,0 +1,366 @@
+{
+  "$schema": "https://demotime.show/demo-time.schema.json",
+  "title": "00 Local LLM",
+  "version": 3,
+  "scenes": [
+    {
+      "title": "Start OLLAMA",
+      "description": "Start the Ollama local LLM server to run local language models.",
+      "moves": [
+        {
+          "action": "open",
+          "path": "local_00_start/start-llm.sh"
+        },
+        {
+          "action": "highlight",
+          "path": "local_00_start/start-llm.sh",
+          "position": "3:14",
+          "highlightWholeLine": true
+        }
+      ],
+      "icons": {
+        "start": "",
+        "end": ""
+      }
+    },
+    {
+      "id": "demo-mif2z2a2-i76a",
+      "title": "show terminal",
+      "description": "\n",
+      "moves": [
+        {
+          "action": "open",
+          "path": "local_00_start/start-llm.sh"
+        },
+        {
+          "action": "highlight",
+          "path": "local_00_start/start-llm.sh",
+          "position": "3:14",
+          "highlightWholeLine": true
+        },
+        {
+          "action": "open",
+          "path": "local_00_start/start-llm.sh"
+        },
+        {
+          "action": "openTerminal",
+          "terminalId": "ollama"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "ollama",
+          "command": "cd local_00_start ",
+          "insertTypingMode": "character-by-character",
+          "insertTypingSpeed": 100
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "ollama",
+          "command": "ollama serve &",
+          "autoExecute": true,
+          "insertTypingMode": "character-by-character",
+          "insertTypingSpeed": 150
+        }
+      ],
+      "icons": {
+        "start": "",
+        "end": ""
+      }
+    },
+    {
+      "id": "demo-mif2d007-sv3g",
+      "title": "show installed models",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "ollama",
+          "command": "ollama list",
+          "autoExecute": true,
+          "insertTypingMode": "character-by-character",
+          "insertTypingSpeed": 150
+        }
+      ]
+    },
+    {
+      "id": "scene-mqsz4qq2-5ln5",
+      "title": "Get A Model",
+      "moves": [
+        {
+          "action": "openTerminal",
+          "terminalId": "mgr"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "command": "ollama pull llama3.2",
+          "terminalId": "mgr",
+          "insertTypingMode": "character-by-character",
+          "insertTypingSpeed": 100
+        }
+      ]
+    },
+    {
+      "id": "demo-mqsz9alp-5hz4",
+      "title": "Model Info",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "command": "ollama show llama3.2",
+          "terminalId": "mgr",
+          "insertTypingMode": "character-by-character",
+          "insertTypingSpeed": 100
+        }
+      ]
+    },
+    {
+      "id": "demo-mqszae1y-id39",
+      "title": "license",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "command": "ollama show llama3.2 --license",
+          "terminalId": "mgr",
+          "insertTypingMode": "character-by-character",
+          "insertTypingSpeed": 100
+        }
+      ]
+    },
+    {
+      "id": "demo-mqszbjwa-v7y2",
+      "title": "Create a Model Copy ",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "command": "ollama cp llama3.2 my-llama-base",
+          "terminalId": "mgr",
+          "insertTypingMode": "character-by-character",
+          "insertTypingSpeed": 100
+        }
+      ]
+    },
+    {
+      "id": "demo-mqszh511-1z11",
+      "title": "Custom Model (Helmut)",
+      "moves": [
+        {
+          "action": "open",
+          "path": "local_00_start/Modelfile"
+        }
+      ]
+    },
+    {
+      "id": "demo-mqszk6ro-zayz",
+      "title": "Custom Model (DevOps Georg) From",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_00_start/Modelfile",
+          "position": "3:3",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mqszn4qa-pql7",
+      "title": "Custom Model SystemP",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_00_start/Modelfile",
+          "position": "6:14",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mqsznnhq-6i4t",
+      "title": "Custom Model generation parameters",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_00_start/Modelfile",
+          "position": "18:30",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mqszdzfz-xbga",
+      "title": "Custom Model generate (Georg)",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "command": "ollama create devops-assistant -f ./local_00_start/Modelfile",
+          "terminalId": "mgr",
+          "insertTypingMode": "character-by-character",
+          "insertTypingSpeed": 100
+        }
+      ]
+    },
+    {
+      "id": "demo-mif2ef5d-i0i9",
+      "title": "show http request",
+      "moves": [
+        {
+          "action": "open",
+          "path": "local_00_start/llm-test.http"
+        },
+        {
+          "action": "highlight",
+          "path": "local_00_start/llm-test.http",
+          "position": "13:25",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "123",
+      "title": "streming response",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_00_start/llm-test.http",
+          "position": "24,0:24,18",
+          "highlightWholeLine": false
+        }
+      ]
+    },
+    {
+      "id": "demo-mif2expt-jgiq",
+      "title": "Replace streaming",
+      "moves": [
+        {
+          "action": "replace",
+          "path": "local_00_start/llm-test.http",
+          "content": "  \"stream\": true",
+          "position": "24",
+          "highlightWholeLine": false
+        }
+      ]
+    },
+    {
+      "id": "demo-mif3dvph-s5d8",
+      "title": "what is SSE",
+      "moves": [
+        {
+          "action": "markdownPreview",
+          "path": ".demo/slides/SSE.md"
+        }
+      ]
+    },
+    {
+      "id": "demo-mif2fgd3-3t32",
+      "title": "show deepseek",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_00_start/llm-test.http",
+          "position": "32:32",
+          "highlightWholeLine": false
+        }
+      ]
+    },
+    {
+      "id": "demo-mimyr4y2-jvwz",
+      "title": "show SSE deepseek",
+      "moves": [
+        {
+          "action": "replace",
+          "path": "local_00_start/llm-test.http",
+          "content": "  \"stream\": true",
+          "highlightWholeLine": false,
+          "position": "39"
+        },
+        {
+          "action": "highlight",
+          "position": "39",
+          "highlightWholeLine": true,
+          "path": "local_00_start/llm-test.http"
+        }
+      ]
+    },
+    {
+      "id": "demo-mif3nw0m-scld",
+      "title": "Multi-turn conversation system",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_00_start/llm-test.http",
+          "position": "50:51",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mif3qu76-vu0o",
+      "title": "Multi-turn conversation user",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_00_start/llm-test.http",
+          "position": "54:55",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mimz1nfm-2py0",
+      "title": "Multi-turn conversation assistent",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_00_start/llm-test.http",
+          "position": "76:79",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mimz2ll8-ychd",
+      "title": "Multi-turn conversation 2ndturn",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "local_00_start/llm-test.http",
+          "position": "80:84",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mif2fgd3-3t35",
+      "title": "close ollama",
+      "moves": [
+        {
+          "action": "executeTerminalCommand",
+          "command": "pkill ollama  ",
+          "terminalId": "ollama",
+          "insertTypingMode": "character-by-character",
+          "insertTypingSpeed": 200
+        },
+        {
+          "action": "replace",
+          "path": "local_00_start/llm-test.http",
+          "content": "  \"stream\": false",
+          "position": "24",
+          "highlightWholeLine": false
+        },
+        {
+          "action": "replace",
+          "path": "local_00_start/llm-test.http",
+          "content": "  \"stream\": false",
+          "position": "39",
+          "highlightWholeLine": false
+        },
+        {
+          "action": "executeTerminalCommand",
+          "command": "lsof -ti:5227 | xargs kill -9",
+          "terminalId": "ollama"
+        },
+        {
+          "action": "closeTerminal",
+          "terminalId": "ollama"
+        }
+      ]
+    }
+  ]
+}
