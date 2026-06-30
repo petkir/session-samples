@@ -1,0 +1,20 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "useGulp": false,
+    "plusBeta": false,
+    "isCreatingSolution": false,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.23.0",
+    "libraryName": "infinity-spfx",
+    "libraryId": "b89a2eea-cd98-4bea-8491-8860c5f4c89b",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "infinity-spfx",
+    "solutionShortDescription": "infinity-spfx description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "extension",
+    "extensionType": "FormCustomizer"
+  }
+}

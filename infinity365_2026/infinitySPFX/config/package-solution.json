@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "infinity-spfx-client-side-solution",
+    "id": "b89a2eea-cd98-4bea-8491-8860c5f4c89b",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.23.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "infinity-spfx description"
+      },
+      "longDescription": {
+        "default": "infinity-spfx description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "infinity-spfx Feature",
+        "description": "The feature that activates elements of the infinity-spfx solution.",
+        "id": "74f5e78e-f15a-4e6c-938c-f328011d4e07",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/infinity-spfx.sppkg"
+  }
+}
