@@ -1,0 +1,116 @@
+{
+  "$schema": "https://demotime.show/demo-time.schema.json",
+  "title": "01_MailAgentService",
+  "description": "",
+  "version": 3,
+  "scenes": [
+    {
+      "id": "scene-mr07o1z5-3xdl",
+      "title": "Register",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "MailAgentService/Services/SubscriptionBootstrapService.cs",
+          "position": "33:42",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mr07p5ff-b7li",
+      "title": "Register mailbox",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "MailAgentService/Services/SubscriptionBootstrapService.cs",
+          "position": "38:38",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mr07sheh-9yyo",
+      "title": "Register Notification URL",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "MailAgentService/Services/SubscriptionBootstrapService.cs",
+          "position": "38:38",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "scene-mr07km2l-73om",
+      "title": "Notification",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "MailAgentService/Program.cs",
+          "position": "28:28",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mr07tn3f-lhug",
+      "title": "Notification (validationToken)",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "MailAgentService/Program.cs",
+          "position": "37:42",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mr07ve34-t9xt",
+      "title": "Notification (queue mail)",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "MailAgentService/Program.cs",
+          "position": "74:74",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mr07zeck-cn7t",
+      "title": "Analyse Mail",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "MailAgentService/Services/MicrosoftAgentFrameworkMailAnalyzer.cs",
+          "position": "35:46",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mr08072t-enmg",
+      "title": "Analyse Mail (llmCall)",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "MailAgentService/Services/MicrosoftAgentFrameworkMailAnalyzer.cs",
+          "position": "49:49",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mr08134g-e3th",
+      "title": "Draft Mail",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "MailAgentService/Services/MailDraftService.cs",
+          "position": "39:57",
+          "highlightWholeLine": true
+        }
+      ]
+    }
+  ]
+}

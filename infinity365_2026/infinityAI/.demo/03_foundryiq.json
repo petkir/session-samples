@@ -1,0 +1,52 @@
+{
+  "$schema": "https://demotime.show/demo-time.schema.json",
+  "title": "01",
+  "description": "",
+  "version": 3,
+  "scenes": [
+    {
+      "id": "scene-mr08d8gi-qqp6",
+      "title": "Knowledge",
+      "moves": [
+        {
+          "action": "openWebsite",
+          "url": "https://ai.azure.com/nextgen/r/YD8uPsGjTVyX24f_IOMuHw%2Cinfinity365%2C%2Caif-infinity365-sbg%2Cproj-infinity/build/knowledge/search/c/projinfinitysrch9z4v08"
+        }
+      ]
+    },
+    {
+      "id": "demo-mr08ik6u-07w4",
+      "title": "Agent",
+      "moves": [
+        {
+          "action": "openWebsite",
+          "url": "https://ai.azure.com/nextgen/r/YD8uPsGjTVyX24f_IOMuHw,infinity365,,aif-infinity365-sbg,proj-infinity/build/agents/testagent1/build"
+        }
+      ]
+    },
+    {
+      "id": "scene-mr08k2i5-chj9",
+      "title": "Instruction",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "AgentWithFoundryIQ/Program.cs",
+          "position": "80:80",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mr08n5o0-yrds",
+      "title": "Instruction (Copy)",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "AgentWithFoundryIQ/Program.cs",
+          "position": "86:87",
+          "highlightWholeLine": true
+        }
+      ]
+    }
+  ]
+}

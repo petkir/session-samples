@@ -1,0 +1,114 @@
+{
+  "$schema": "https://demotime.show/demo-time.schema.json",
+  "title": "02_ImportAISearch",
+  "description": "",
+  "version": 3,
+  "scenes": [
+    {
+      "id": "scene-mr083dbp-awyf",
+      "title": "Read Folder",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "ImportDoc2AISearch/Program.cs",
+          "position": "29:35",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mr084qsl-k48c",
+      "title": "Ensure Index",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "ImportDoc2AISearch/Program.cs",
+          "position": "49:49",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "scene-mr085fl4-uvaj",
+      "title": "Showindex",
+      "moves": [
+        {
+          "action": "openWebsite",
+          "url": "https://portal.azure.com/#@kirschner.zone/resource/subscriptions/603f2e3e-c1a3-4d5c-97db-87ff20e32e1f/resourceGroups/infinity365/providers/Microsoft.Search/searchServices/proj-infinity-srch/indexes"
+        }
+      ]
+    },
+    {
+      "id": "demo-mr085dji-n6mm",
+      "title": "Loop",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "ImportDoc2AISearch/Program.cs",
+          "position": "56:56",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mr0876zv-kyrf",
+      "title": "Loop (Extract Text)",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "ImportDoc2AISearch/Program.cs",
+          "position": "60:60",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mr087r05-pqow",
+      "title": "Loop (Chunk)",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "ImportDoc2AISearch/Program.cs",
+          "position": "61:61",
+          "highlightWholeLine": true
+        }
+      ]
+    },
+    {
+      "id": "demo-mr0898io-udbk",
+      "title": "Loop (Chunk Loop)",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "ImportDoc2AISearch/Program.cs",
+          "highlightWholeLine": true,
+          "position": "71:71"
+        }
+      ]
+    },
+    {
+      "id": "demo-mr089wwa-e9vc",
+      "title": "Loop (Embedding)",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "ImportDoc2AISearch/Program.cs",
+          "highlightWholeLine": true,
+          "position": "74:74"
+        }
+      ]
+    },
+    {
+      "id": "demo-mr08aivj-wepu",
+      "title": "Loop (Upload)",
+      "moves": [
+        {
+          "action": "highlight",
+          "path": "ImportDoc2AISearch/Program.cs",
+          "highlightWholeLine": true,
+          "position": "76:85"
+        }
+      ]
+    }
+  ]
+}
