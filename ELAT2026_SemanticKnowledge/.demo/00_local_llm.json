@@ -244,6 +244,9 @@
         {
           "action": "markdownPreview",
           "path": ".demo/slides/SSE.md"
+        },
+        {
+          "action": ""
         }
       ]
     },

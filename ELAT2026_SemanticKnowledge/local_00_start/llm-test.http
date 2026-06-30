@@ -36,7 +36,7 @@ Content-Type: application/json
       "content": "Explain recursion in simple terms"
     }
   ],
-   "stream": true
+  "stream": false
 }
 
 ### 5. Multi-turn conversation
